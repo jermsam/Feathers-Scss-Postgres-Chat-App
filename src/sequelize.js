@@ -10,7 +10,8 @@ module.exports = function (app) {
     },
 
     dialectOptions: {
-      ssl: false
+      ssl: true,
+      sslfactory:'org.postgresql.ssl.NonValidatingFactory'
     }
   });
   const oldSetup = app.setup;
