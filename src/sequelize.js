@@ -8,11 +8,15 @@ module.exports = function (app) {
     define: {
       freezeTableName: true
     },
-
+    ssl: true,
     dialectOptions:{
+
       ssl:{
+
+        sslmode: 'verify-ca',
         sslfactory: 'org.postgresql.ssl.NonValidatingFactory'
       },
+      keepAlive:true
     }
   });
   const oldSetup = app.setup;
