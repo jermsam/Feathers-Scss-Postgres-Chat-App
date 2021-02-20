@@ -7,6 +7,16 @@ module.exports = function (app) {
     logging: false,
     define: {
       freezeTableName: true
+    },
+    ssl: true,
+    dialectOptions:{
+      ssl:{
+        // add the sslmode=require query parameter
+        require:true,
+        // disable ssl verification
+        requireUnauthorized:false
+      },
+      keepAlive:true
     }
   });
   const oldSetup = app.setup;
