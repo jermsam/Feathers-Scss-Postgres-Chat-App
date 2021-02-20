@@ -11,12 +11,7 @@ module.exports = function (app) {
     ssl: true,
     dialectOptions:{
 
-      ssl:{
-        ssl: true,
-        sslmode: 'verify-ca',
-        sslfactory: 'org.postgresql.ssl.NonValidatingFactory'
-      },
-      keepAlive:true
+      ssl:true,
     }
   });
   const oldSetup = app.setup;
