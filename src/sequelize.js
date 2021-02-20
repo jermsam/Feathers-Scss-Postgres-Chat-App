@@ -8,10 +8,9 @@ module.exports = function (app) {
     define: {
       freezeTableName: true
     },
-
+    ssl:true,
     dialectOptions:{
       ssl:{
-        ssl: true,
         sslmode: 'verify-ca',
         sslfactory: 'org.postgresql.ssl.NonValidatingFactory'
       },
