@@ -1,4 +1,5 @@
 {
   "host": "chat-app-postgres-app.feathersjs.com",
-  "port": "PORT"
+  "port": "PORT",
+  "postgres": "DATABASE_URL"
 }
