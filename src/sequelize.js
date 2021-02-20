@@ -11,7 +11,7 @@ module.exports = function (app) {
     ssl:true,
     dialectOptions:{
       ssl:{
-        sslmode: 'verify-ca',
+        sslmode: 'disable',
         sslfactory: 'org.postgresql.ssl.NonValidatingFactory'
       },
       keepAlive:true
