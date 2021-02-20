@@ -12,6 +12,7 @@ module.exports = function (app) {
     dialectOptions:{
 
       ssl: {
+        strictSSL: false,
         rejectUnauthorized: false, // very important
       }
     }
