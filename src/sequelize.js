@@ -11,7 +11,9 @@ module.exports = function (app) {
 
     dialectOptions:{
 
-      rejectUnauthorized: false, // very important
+      ssl: {
+        rejectUnauthorized: false, // very important
+      }
     }
   });
   const oldSetup = app.setup;
