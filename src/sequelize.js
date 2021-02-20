@@ -10,7 +10,7 @@ module.exports = function (app) {
     },
 
     dialectOptions: {
-      ssl: true
+      ssl: false
     }
   });
   const oldSetup = app.setup;
