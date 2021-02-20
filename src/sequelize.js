@@ -2,16 +2,16 @@ const Sequelize = require('sequelize');
 
 module.exports = function (app) {
   const connectionString = app.get('postgres');
-  const sequelize = new Sequelize(connectionString, {
+  const sequelize = new Sequelize(`${connectionString}?sslmode=require`, {
     dialect: 'postgres',
     logging: false,
     define: {
       freezeTableName: true
     },
-    ssl: true,
+
     dialectOptions:{
 
-      ssl:true,
+      rejectUnauthorized: false, // very important
     }
   });
   const oldSetup = app.setup;
