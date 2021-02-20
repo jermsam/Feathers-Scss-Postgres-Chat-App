@@ -8,7 +8,7 @@ module.exports = function (app) {
     define: {
       freezeTableName: true
     },
-    ssl: false,
+    ssl: true,
     dialectOptions:{
       ssl:{
         // add the sslmode=require query parameter
