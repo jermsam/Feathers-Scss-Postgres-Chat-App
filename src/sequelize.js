@@ -8,7 +8,14 @@ module.exports = function (app) {
     define: {
       freezeTableName: true
     },
-    ssl: { rejectUnauthorized: false }
+    ssl: true,
+    dialectOptions:{
+      ssl:{
+        // disable ssl verification
+        requireUnauthorized:false
+      },
+      keepAlive:true
+    }
   });
   const oldSetup = app.setup;
 
