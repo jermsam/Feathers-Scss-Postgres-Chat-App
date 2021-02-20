@@ -12,8 +12,8 @@ module.exports = function (app) {
     dialectOptions:{
 
       ssl: {
-        strictSSL: false,
-        rejectUnauthorized: false, // very important
+        strictSSL: false, // allow us to use our self-signed cert for testing
+        rejectUnauthorized: false,
       }
     }
   });
