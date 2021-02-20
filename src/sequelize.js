@@ -8,13 +8,9 @@ module.exports = function (app) {
     define: {
       freezeTableName: true
     },
-    ssl: true,
-    dialectOptions:{
-      ssl:{
-        // disable ssl verification
-        requireUnauthorized:false
-      },
-      keepAlive:true
+
+    dialectOptions: {
+      ssl: true
     }
   });
   const oldSetup = app.setup;
