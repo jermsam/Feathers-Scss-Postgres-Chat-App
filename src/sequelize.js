@@ -9,9 +9,13 @@ module.exports = function (app) {
       freezeTableName: true
     },
 
-    dialectOptions: {
-      ssl: true,
-      sslfactory:'org.postgresql.ssl.NonValidatingFactory'
+    dialectOptions:{
+      ssl:{
+        require: true,
+        // disable ssl verification
+        requireUnauthorized:false
+      },
+      keepAlive:true
     }
   });
   const oldSetup = app.setup;
