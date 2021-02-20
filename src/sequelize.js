@@ -9,13 +9,6 @@ module.exports = function (app) {
       freezeTableName: true
     },
 
-    dialectOptions:{
-
-      ssl: {
-        strictSSL: false, // allow us to use our self-signed cert for testing
-        rejectUnauthorized: false,
-      }
-    }
   });
   const oldSetup = app.setup;
 
