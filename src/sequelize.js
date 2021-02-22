@@ -5,6 +5,7 @@ module.exports = function (app) {
   const sequelize = new Sequelize(connectionString, {
     dialect: 'postgres',
     logging: false,
+    protocol: 'postgres',
     define: {
       freezeTableName: true
     },
@@ -12,7 +13,7 @@ module.exports = function (app) {
 
     dialectOptions: {
       ssl:{
-        sslcert:'',
+        require: true,
         sslStrict: false, // turning off sslStrict mode
         rejectUnauthorized: false, // disabling its ability to reject Unauthorised connections
       }
