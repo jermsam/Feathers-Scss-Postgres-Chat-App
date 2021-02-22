@@ -9,11 +9,12 @@ module.exports = {
     dialect,
     url,
     migrationStorageTableName: '_migrations',
-    dialectOptions:{
+    dialectOptions: {
       ssl:{
         sslStrict: false, // turning off sslStrict mode
         rejectUnauthorized: false, // disabling its ability to reject Unauthorised connections
       }
+
     }
   }
 };
