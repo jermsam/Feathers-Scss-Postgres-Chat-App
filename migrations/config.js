@@ -8,6 +8,12 @@ module.exports = {
   [env]: {
     dialect,
     url,
-    migrationStorageTableName: '_migrations'
+    migrationStorageTableName: '_migrations',
+    dialectOptions:{
+      ssl:{
+        sslStrict: false, // turning off sslStrict mode
+        rejectUnauthorized: false, // disabling its ability to reject Unauthorised connections
+      }
+    }
   }
 };
