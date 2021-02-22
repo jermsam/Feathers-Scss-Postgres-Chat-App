@@ -26,8 +26,12 @@
   "scripts": {
     "test": "yarn run lint && yarn run jest",
     "lint": "eslint src/. test/. --config .eslintrc.json --fix",
-    "dev": "nodemon src/",
-    "start": "node src/",
+
+    "run-migration": "sequelize db:migrate",
+    "undo-migration": "sequelize db:migrate:undo",
+
+    "dev": "yarn run-migration && nodemon src/",
+    "start": "yarn run-migration &&  node src/",
     "jest": "jest  --forceExit"
   },
   "standard": {
@@ -52,7 +56,9 @@
     "feathers-sequelize": "^6.2.0",
     "helmet": "^4.3.1",
     "pg": "^8.5.1",
-    "sequelize": "^6.3.5",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^6.5.0",
+    "sequelize-cli": "^6.2.0",
     "serve-favicon": "^2.5.0",
     "winston": "^3.0.0"
   },
