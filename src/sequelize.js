@@ -11,7 +11,6 @@ module.exports = function (app) {
 
 
     dialectOptions: {
-
       ssl:{
         sslcert:'',
         sslStrict: false, // turning off sslStrict mode
