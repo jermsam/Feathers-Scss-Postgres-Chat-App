@@ -10,7 +10,7 @@ module.exports = function (app) {
       freezeTableName: true
     },
 
-
+    ssl:true,
     dialectOptions: {
       ssl:{
         require: true,
