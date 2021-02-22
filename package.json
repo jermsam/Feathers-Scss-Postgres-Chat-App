@@ -29,7 +29,7 @@
     "run-migration": "sequelize db:migrate",
     "undo-migration": "sequelize db:migrate:undo",
     "dev": "yarn run-migration && nodemon src/",
-    "start": "sequelize db:migrate && nodemon src/",
+    "start": "nodemon src/",
     "jest": "jest  --forceExit"
   },
   "standard": {

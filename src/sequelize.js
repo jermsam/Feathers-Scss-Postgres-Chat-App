@@ -8,7 +8,7 @@ module.exports = function (app) {
     define: {
       freezeTableName: true
     },
-
+    ssl: true,
   });
   const oldSetup = app.setup;
 
