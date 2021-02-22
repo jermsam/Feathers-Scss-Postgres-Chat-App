@@ -8,15 +8,7 @@ module.exports = function (app) {
     define: {
       freezeTableName: true
     },
-    ssl:true,
-    dialectOptions: {
 
-      ssl:{
-        sslStrict: false, // turning off sslStrict mode
-        rejectUnauthorized: false, // disabling its ability to reject Unauthorised connections
-      }
-
-    }
   });
   const oldSetup = app.setup;
 
