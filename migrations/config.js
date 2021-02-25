@@ -9,7 +9,7 @@ module.exports = {
     dialect,
     url,
     migrationStorageTableName: '_migrations',
-    /**
+
     dialectOptions: {
       ssl:{
         sslStrict: false, // turning off sslStrict mode
@@ -17,6 +17,6 @@ module.exports = {
       }
 
     }
-    */
+
   }
 };
