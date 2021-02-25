@@ -1,0 +1,54 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif";
+  font-weight: 400;
+  font-size: 16px;
+  color: #2c3e50;
+}
+
+main {
+  margin-top: 100px;
+  padding: 20px;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
+}
+
+a {
+  color: #3cf;
+  text-decoration: none;
+}
+a:hover, a:focus {
+  color: #3cf;
+}
+
+h2 {
+  font-size: 2em;
+  font-weight: 100;
+  color: #d30f40;
+}
+
+button, a {
+  cursor: pointer;
+}
+
+.prompts {
+  font-size: 0.8rem;
+}
+
+.isemail > span, .isuppercase > span, .islowercase > span, .eightchar > span, .isnumber > span {
+  color: #09cc09;
+}
+.isemail > span.error, .isuppercase > span.error, .islowercase > span.error, .eightchar > span.error, .isnumber > span.error {
+  color: #d30f40;
+}/*# sourceMappingURL=index.css.map */

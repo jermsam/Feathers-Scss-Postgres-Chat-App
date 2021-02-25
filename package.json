@@ -59,6 +59,7 @@
     "sequelize": "^6.5.0",
     "sequelize-cli": "^6.2.0",
     "serve-favicon": "^2.5.0",
+    "validator": "^13.5.2",
     "winston": "^3.0.0"
   },
   "devDependencies": {
