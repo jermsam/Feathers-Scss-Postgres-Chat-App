@@ -10,7 +10,7 @@ module.exports = function (app) {
       freezeTableName: true
     },
 
-    /**
+
     dialectOptions: {
       ssl:{
         sslStrict: false, // turning off sslStrict mode
@@ -18,7 +18,7 @@ module.exports = function (app) {
       }
 
     }
-    */
+
   });
   const oldSetup = app.setup;
 
