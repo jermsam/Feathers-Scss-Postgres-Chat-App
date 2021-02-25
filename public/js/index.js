@@ -115,6 +115,8 @@ const profilePage= (user)=>`
 <div class="profile">
 <h2>CHAT APP</h2>
 <div class='user-profile'>
+<img src="${user.avatar}" alt="${user.username}" />
+<p>${user.username}</p>
 <p>${user.email}</p>
 </div>
 <form>
@@ -213,6 +215,7 @@ const main = async()=>{
         }catch(err){
           const generalPrompt= document.querySelector('#generalPrompt');
           generalPrompt.classList.add('error');
+          console.log(err);
           const {errors:{withDigits,withLowercase,withUppercase,longEnough}} =err;
           console.log(err);
           switch(err.message){

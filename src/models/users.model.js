@@ -18,7 +18,16 @@ module.exports = function (app) {
       type: DataTypes.STRING,
       allowNull: false
     },
-
+    avatar:{
+      type: Sequelize.STRING,
+    },
+    username:{
+      type: Sequelize.STRING,
+    },
+    isOnline:{
+      type: Sequelize.BOOLEAN,
+      defaultValue:false
+    }
 
   }, {
     hooks: {
