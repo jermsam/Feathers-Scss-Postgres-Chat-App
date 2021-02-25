@@ -51,4 +51,8 @@ button, a {
 }
 .isemail > span.error, .isuppercase > span.error, .islowercase > span.error, .eightchar > span.error, .isnumber > span.error {
   color: #d30f40;
+}
+
+#generalPrompt {
+  color: #d30f40;
 }/*# sourceMappingURL=index.css.map */

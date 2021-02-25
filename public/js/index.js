@@ -97,6 +97,9 @@ const homePage =`<div class='home'>
 
   </div>
 </div>
+<div class='prompts'>
+<span id='generalPrompt'></span>
+</div>
 <div class="buttons">
   <button type="submit">Sign Up</button>
 </div>
@@ -208,7 +211,53 @@ const main = async()=>{
           });
           location.reload();
         }catch(err){
-          console.log(err.message);
+          const generalPrompt= document.querySelector('#generalPrompt');
+          generalPrompt.classList.add('error');
+          const {errors:{withDigits,withLowercase,withUppercase,longEnough}} =err;
+          console.log(err);
+          switch(err.message){
+          case 'Invalid login':
+            generalPrompt.innerHTML = 'Invalid username or password';
+
+            break ;
+
+          case 'validation-error':
+
+
+            if(withUppercase){
+              // what to do if not email
+              isuppercasePrompt.innerHTML='✘';
+              isuppercasePrompt.classList.add('error');
+
+            }
+
+            if(withLowercase){
+              // what to do if not email
+              islowercasePrompt.innerHTML='✘';
+              islowercasePrompt.classList.add('error');
+
+            }
+
+            if(longEnough){
+              // what to do if not email
+              eightcharPrompt.innerHTML='✘';
+              eightcharPrompt.classList.add('error');
+
+            }
+
+            if(withDigits){
+              // what to do if not email
+              numberPrompt.innerHTML='✘';
+              numberPrompt.classList.add('error');
+
+            }
+
+            break;
+          default:
+            console.log(err);
+            generalPrompt.innerHTML = err.message;
+            break;
+          }
         }
 
       }
