@@ -119,13 +119,30 @@ const profilePage= (user)=>`
 <p>${user.username}</p>
 <p>${user.email}</p>
 </div>
+
+<div class="users-list">
+
+</div>
+
+
 <form>
 <button type='submit' id='logout'>Log out</button>
 </form>
 </div>
 `;
 
+
+
 const mainContainer = document.querySelector('.container');
+
+const renderUserInfo = ({username,avatar,email,isOnline})=>`
+<div>__________________________________________</div>
+      <img src="${avatar}" name="${username}"/>
+      <div>${username}</div>
+      <div>${email}</div>
+      <div>${isOnline?'online':'offline'}</div>
+      <div>__________________________________________</div>
+`;
 
 const main = async()=>{
 
@@ -140,6 +157,37 @@ const main = async()=>{
     logoutBtn.addEventListener('click',async()=>{
       await app.logout();
       location.reload();
+    });
+
+    // users list
+
+
+
+    const usersListPannel = document.querySelector('.users-list');
+
+    const {data}= await app.service('users').find({
+      query:{
+        id:{
+          $ne:user&&user.id
+        },
+        $sort:{
+          createdAt:-1
+        }
+      }
+    });
+
+    data.forEach(({id,...user})=>{
+      usersListPannel.innerHTML+=`
+      <div id="${id}">
+      ${renderUserInfo(user)}
+      </div>
+      `;
+    });
+
+    app.service('users').on('patched',async(user)=>{
+      if(user){
+        document.getElementById(user.id).innerHTML=renderUserInfo(user);
+      }
     });
 
   }catch(error){
