@@ -169,9 +169,6 @@ const main = async()=>{
       query:{
         id:{
           $ne:user&&user.id
-        },
-        $sort:{
-          createdAt:-1
         }
       }
     });
