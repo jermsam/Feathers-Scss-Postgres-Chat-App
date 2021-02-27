@@ -30,17 +30,27 @@ module.exports = function (app) {
     }
 
   }, {
+    timestamps: false,
     hooks: {
       beforeCount(options) {
         options.raw = true;
       }
     }
+
   });
 
   // eslint-disable-next-line no-unused-vars
   users.associate = function (models) {
     // Define associations here
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
+    this.hasMany(models.messages, {
+      onDelete: 'CASCADE',
+      foreignKey:'senderId'
+    });
+    this.hasMany(models.messages, {
+      onDelete: 'CASCADE',
+      foreignKey:'receiverId'
+    });
   };
 
   return users;
