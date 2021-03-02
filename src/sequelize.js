@@ -12,12 +12,12 @@ module.exports = function (app) {
 
 
     dialectOptions: {
-
-      ssl:{
+      /***
+  ssl:{
         sslStrict: false, // turning off sslStrict mode
         rejectUnauthorized: false, // disabling its ability to reject Unauthorised connections
       }
-
+ */
     }
 
   });

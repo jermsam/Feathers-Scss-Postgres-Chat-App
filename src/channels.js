@@ -89,7 +89,7 @@ module.exports = function(app) {
 
       return [
         app.channel(app.channels).filter(connection =>
-          ( connection.user.id === receiverId) ||  ( connection.user.id === user.id)
+          ( connection.user.id == receiverId) ||  ( connection.user.id == user.id)
         )
       ];
 
