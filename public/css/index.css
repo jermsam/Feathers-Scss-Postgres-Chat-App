@@ -1,11 +1,12 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 html, body {
-  font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif";
+  font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif';
   font-weight: 400;
   font-size: 16px;
   color: #2c3e50;
@@ -28,6 +29,7 @@ a {
   color: #3cf;
   text-decoration: none;
 }
+
 a:hover, a:focus {
   color: #3cf;
 }
@@ -49,10 +51,52 @@ button, a {
 .isemail > span, .isuppercase > span, .islowercase > span, .eightchar > span, .isnumber > span {
   color: #09cc09;
 }
+
 .isemail > span.error, .isuppercase > span.error, .islowercase > span.error, .eightchar > span.error, .isnumber > span.error {
   color: #d30f40;
 }
 
 #generalPrompt {
   color: #d30f40;
-}/*# sourceMappingURL=index.css.map */
+}
+
+.is-active {
+  background-color: cornflowerblue;
+  color: aliceblue;
+}
+
+#groups > div, #inbox > div, #user-profile, .users-list__item {
+  cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-bottom: 0.2rem solid #eee;
+  padding: 1rem;
+  margin: 1rem;
+}
+
+#groups > div img, #inbox > div img, #user-profile img, .users-list__item img {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+}
+
+#groups > div .name, #inbox > div .name, #user-profile .name, .users-list__item .name {
+  margin: 1rem;
+}
+
+#user-profile .email {
+  display: none;
+}
+
+.users-list__item .email, .users-list__item .indicator {
+  display: none;
+}
+/*# sourceMappingURL=index.css.map */

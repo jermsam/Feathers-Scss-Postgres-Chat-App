@@ -78,4 +78,26 @@ module.exports = function(app) {
 
   // authenticated users should be notified when a user is patched
   app.service('users').publish('patched', () => app.channel('authenticated'));
+
+  app.service('messages').publish('created', ({receiverId}, {params:{user}}) => {
+
+    // we want to publish created events of
+
+
+    if(receiverId){
+      // recipients only to the specified recipients or the sender
+
+      return [
+        app.channel(app.channels).filter(connection =>
+          ( connection.user.id === receiverId) ||  ( connection.user.id === user.id)
+        )
+      ];
+
+    }else{
+    // public messages (ie: receiverId='') to all authenticated users
+      return app.channel('authenticated');
+    }
+
+
+  });
 };
