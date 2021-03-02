@@ -394,7 +394,7 @@ const main = async()=>{
 
     await populateChat(receiverId,user,chatPannel);
 
-    app.service('messages').on('created',()=>populateChat(receiverId,user,chatPannel));
+
 
     document.querySelector('input[name=text-box]')
       .addEventListener('keyup',async({key,target})=>{
