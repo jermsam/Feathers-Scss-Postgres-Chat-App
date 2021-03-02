@@ -65,3 +65,57 @@ button,a{
   color:$error;
 }
 
+.is-active{
+  @extend %active;
+}
+
+%active{
+  background-color:$primary;
+  color:aliceblue;
+}
+
+.is-active{
+  @extend %active;
+}
+
+%items{
+  cursor:pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-bottom: 0.2rem solid #eee;
+  padding:  1rem;
+  margin: 1rem;
+   img{
+     width:3rem;
+     height:3rem;
+     border-radius: 50%;
+   }
+
+   .name{
+     margin:1rem
+   }
+}
+
+#groups > div,#inbox >div{
+
+@extend %items;
+}
+
+#user-profile{
+  @extend %items;
+
+  .email{
+    display:none;
+  }
+}
+
+.users-list{
+  &__item {
+    @extend %items;
+    .email, .indicator{
+      display:none;
+    }
+
+  }
+}

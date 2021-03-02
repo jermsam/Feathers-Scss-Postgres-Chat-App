@@ -114,35 +114,214 @@ const homePage =`<div class='home'>
 const profilePage= (user)=>`
 <div class="profile">
 <h2>CHAT APP</h2>
-<div class='user-profile'>
+
+<div id='menu'>
+<section id='user-profile'>
 <img src="${user.avatar}" alt="${user.username}" />
-<p>${user.username}</p>
-<p>${user.email}</p>
-</div>
+<div class="name">${user.username}</div>
+<div class="email">${user.email}</div>
+</section>
+<h3>USERS:</h3>
+<section id="users-list">
 
-<div class="users-list">
 
-</div>
-
+</section>
 
 <form>
 <button type='submit' id='logout'>Log out</button>
 </form>
 </div>
+
+<div id="chat">
+<section id="chat-header">
+CHATING WITH:
+<div id="receiver" >Public </div>
+</section>
+
+<section id="chat-list"></section>
+
+<section id="chat-inputs">
+  <input type="text" name="text-box"  placeholder="Send text" />
+</section>
+</div>
+<div id='conversations'>
+
+<!-- groups -->
+<h3>Groups:</h3>
+<section id="groups">
+  <div id="" class='is-active'>
+    <img src="https://image.flaticon.com/icons/png/512/32/32441.png" alt="public" />
+    <div class="name">
+    Public
+    </div>
+  </div>
+</section>
+<h3>INBOX:</h3>
+<!-- inbox -->
+<section id="inbox">
+
+</section>
+</div>
+
+</div>
 `;
 
+const populateChat = async(receiverId,user,chatPannel)=>{
+  chatPannel.innerHTML='';
+  const chatMsgResponse = await app.service('messages').find({
+    query:{
+      $or:[
+        {
+          receiverId:user.id,
+          senderId:receiverId
+        },
+        {
+          receiverId,
+          senderId:user.id
+        },
+      ]
+      ,
+      $sort:{
+        createdAt:1
+      }
+    }
+  });
 
+
+
+  chatMsgResponse.data.forEach(
+    ({text,createdAt,sender:{id,avatar,username}})=>{
+      const classname = id!=user.id ? 'yours':'others';
+
+      chatPannel.innerHTML +=`
+      <div class="chat-list__item ${classname}">
+        <img src="${avatar}" alt="${username}/>
+        <div class="chat-list__item-text">${text}</div>
+        <div class="chat-list__item-date">${createdAt}</div>
+      </div>
+      `;
+
+
+    }
+  );
+
+};
 
 const mainContainer = document.querySelector('.container');
 
 const renderUserInfo = ({username,avatar,email,isOnline})=>`
-<div>__________________________________________</div>
+
       <img src="${avatar}" name="${username}"/>
-      <div>${username}</div>
-      <div>${email}</div>
-      <div>${isOnline?'online':'offline'}</div>
-      <div>__________________________________________</div>
+      <div  class="name">${username}</div>
+      <div class="email">${email}</div>
+      <div class="indicator">${isOnline?'online':'offline'}</div>
+
 `;
+
+const selectUserListItem=(item,user,chatPannel)=> {
+
+  item.addEventListener('click',async () =>{
+
+    const receiverDiv =document.querySelector('#receiver');
+
+    if(!item.classList.contains('is-active')){
+      item.classList.add('is-active');
+    }
+
+    document.querySelectorAll('.is-active').forEach(active=>{
+      if(!active.isEqualNode(item)){
+        active.classList.remove('is-active');
+        if(receiverDiv.classList.contains(active.id)){
+          receiverDiv.classList.remove(active.id);
+
+        }
+      }
+    });
+
+    const id =item.id||null;
+
+
+
+
+    let username ='';
+    item.childNodes.forEach(child =>{
+      // child whose classname is username.
+      if(child.className=='name'){
+        username =(child.innerHTML);
+      }
+    });
+
+
+
+    //
+    receiverDiv.innerHTML=username;
+
+    if(id){
+      receiverDiv.classList.add(id);
+
+    }
+    await populateChat(id,user,chatPannel);
+  });
+
+};
+
+const getHasConversation =(pannel,id)=>{
+
+  var BreakException = {};
+  let hasConversation = false;
+
+  pannel.childNodes.forEach(node=>{
+    try{
+      if (node.id==id){
+        hasConversation=true;
+        throw BreakException;
+      }
+    }catch(e){
+      if (e !== BreakException) throw e;
+    }
+
+  });
+  return hasConversation;
+};
+
+const renderInboxInfo =(text,{avatar,username,isOnline})=>`
+<img src="${avatar}" name="${username}"/>
+<div  class="name" style="display:none;">${username}</div>
+<div>
+<div class="text">${text}</div>
+<div class="indicator">${isOnline?'online':'off'}</div>
+`;
+
+const renderInboxItems = async (inboxPannel,user) =>{
+
+  const inboxData = await app.service('messages').find({query:{
+    receiverId:user.id,
+    $sort:{
+      createdAt:1
+    }
+  }});
+
+  inboxData.data.map(({text,senderId,sender})=>{
+    console.log(senderId);
+
+    const hasConversation = getHasConversation(inboxPannel,senderId);
+
+    if(hasConversation){
+      document.getElementById(senderId).innerHTML=renderInboxInfo(text,sender);
+    }else{
+      inboxPannel.innerHTML +=`
+    <div id="${senderId}">
+    ${renderInboxInfo(text,sender)}
+</div>
+
+</div>
+    `;
+    }
+
+  });
+};
+
+
 
 const main = async()=>{
 
@@ -162,8 +341,10 @@ const main = async()=>{
     // users list
 
 
-
-    const usersListPannel = document.querySelector('.users-list');
+    const chatPannel = document.querySelector('#chat-list');
+    const usersListPannel = document.querySelector('#users-list');
+    const inboxPannel = document.querySelector('#inbox');
+    const groupsPannel = document.querySelector('#groups');
 
     const {data}= await app.service('users').find({
       query:{
@@ -173,19 +354,62 @@ const main = async()=>{
       }
     });
 
-    data.forEach(({id,...user})=>{
-      usersListPannel.innerHTML+=`
-      <div id="${id}">
-      ${renderUserInfo(user)}
-      </div>
-      `;
+
+
+    await renderInboxItems(inboxPannel,user);
+
+    app.service('messages').on('created',async()=>{
+      await renderInboxItems(inboxPannel,user);
     });
 
-    app.service('users').on('patched',async(user)=>{
-      if(user){
-        document.getElementById(user.id).innerHTML=renderUserInfo(user);
+    data.forEach(({id,...user})=>{
+    // check has conversation
+      const hasConversation = getHasConversation(inboxPannel,id);
+      if(!hasConversation){
+        usersListPannel.innerHTML+=`
+  <div id="${id}" class='users-list__item'>
+  ${renderUserInfo(user)}
+  </div>
+  `;
+      }
+
+    });
+
+
+    app.service('users').on('patched',async({user})=>{
+      const parentDiv = document.getElementById(user.id);
+      if(user&&parentDiv){
+        parentDiv.innerHTML=renderUserInfo(user);
       }
     });
+
+    inboxPannel.childNodes.forEach((item)=>selectUserListItem(item,user,chatPannel));
+    usersListPannel.childNodes.forEach((item)=>selectUserListItem(item,user,chatPannel));
+    groupsPannel.childNodes.forEach((item)=>selectUserListItem(item,user,chatPannel));
+
+
+    // chat
+
+    const receiverId=document.querySelector('#receiver').classList[0]||null;
+
+    await populateChat(receiverId,user,chatPannel);
+
+    app.service('messages').on('created',()=>populateChat(receiverId,user,chatPannel));
+
+    document.querySelector('input[name=text-box]')
+      .addEventListener('keyup',async({key,target})=>{
+
+        if(key=='Enter'&&target.value){
+          const receiverId=document.querySelector('#receiver').classList[0]||null;
+
+          const text = target.value;
+          await app.service('messages').create({text,receiverId});
+          target.value='';
+        }
+
+
+      });
+
 
   }catch(error){
     console.log(error);
