@@ -1,6 +1,6 @@
 
 @import 'colors';
-
+@import 'form';
 
 
 * {
@@ -13,13 +13,10 @@ html, body {
   font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif';
   font-weight: 400;
   font-size: 16px;
-  color: #2c3e50;
+  color: $off;
 }
 
-main {
-  margin-top: 100px;
-  padding: 20px;
-}
+
 
 footer {
   position: absolute;
@@ -37,21 +34,11 @@ a {
   }
 }
 
-h2 {
-  font-size: 2em;
-  font-weight: 100;
-  color: $error;
-
-}
-
 button,a{
   cursor: pointer;
 }
 
-.prompts{
-  font-size:0.8rem;
 
-}
 
 .isemail >span, .isuppercase>span, .islowercase>span, .eightchar>span, .isnumber>span{
   color:$valid;
@@ -71,7 +58,7 @@ button,a{
 
 %active{
   background-color:$primary;
-  color:aliceblue;
+  color:$light;
 }
 
 .is-active{
@@ -83,7 +70,7 @@ button,a{
   display: flex;
   flex-direction: row;
   align-items: center;
-  border-bottom: 0.2rem solid #eee;
+  border-bottom: 0.2rem solid $light;
   padding:  1rem;
   margin: 1rem;
    img{
@@ -118,4 +105,21 @@ button,a{
     }
 
   }
+}
+
+// home page
+
+.home{
+  display:flex;
+  flex-direction:column;
+  align-items: center;
+  justify-content: center;
+  min-height:100vh;
+  background: linear-gradient(to top right, $primary 0%,$light 50%);
+    h2{
+      text-align: center;
+      font-size:4rem;
+      font-weight: bold;
+      margin: 1rem;
+    }
 }

@@ -470,7 +470,7 @@ const main = async()=>{
         submitButton.innerHTML='Sign In';
       }else{
         toggleAnchor.innerHTML='Sign in';
-        toggleSpan.innerHTML='ALready registered?';
+        toggleSpan.innerHTML='Already registered?';
         submitButton.innerHTML='Sign Up';
       }
     });
