@@ -399,7 +399,7 @@ const main = async()=>{
 
     app.service('users').on('patched',async(user)=>{
 
-      const parentDiv = document.getElementById(userId);
+      const parentDiv = document.getElementById(user.id);
       console.log(parentDiv);
       if(parentDiv){
         parentDiv.innerHTML=renderUserInfo(user);
