@@ -116,7 +116,7 @@ const profilePage= (user)=>`
 <h2>CHAT APP</h2>
 
 <div id='menu'>
-<section id='user-profile'>
+<section id='user-profile' class="${user.id}">
 <img src="${user.avatar}" alt="${user.username}" />
 <div class="name">${user.username}</div>
 <div class="email">${user.email}</div>
@@ -166,34 +166,42 @@ CHATING WITH:
 </div>
 `;
 
-const populateChat = async(receiverId,user,chatPannel)=>{
-  chatPannel.innerHTML='';
-  const chatMsgResponse = await app.service('messages').find({
-    query:{
-      $or:[
-        {
-          receiverId:user.id,
-          senderId:receiverId
-        },
-        {
-          receiverId,
-          senderId:user.id
-        },
-      ]
-      ,
-      $sort:{
-        createdAt:1
-      }
+const populateChat = async(receiverId)=>{
+
+  const userId = document.querySelector('#user-profile').classList[0];
+
+  const query = receiverId?{
+    $or:[
+      {
+        receiverId:userId,
+        senderId:receiverId
+      },
+      {
+        receiverId,
+        senderId:userId
+      },
+    ]
+    ,
+    $sort:{
+      createdAt:1
     }
+  }:{
+    receiverId:null,
+    $sort:{
+      createdAt:1
+    }
+  };
+  const chatMsgResponse = await app.service('messages').find({
+    query
   });
 
-
+  document.querySelector('#chat-list').innerHTML='';
 
   chatMsgResponse.data.forEach(
     ({text,createdAt,sender:{id,avatar,username}})=>{
-      const classname = id!=user.id ? 'yours':'others';
+      const classname = id!=userId ? 'yours':'others';
 
-      chatPannel.innerHTML +=`
+      document.querySelector('#chat-list').innerHTML +=`
       <div class="chat-list__item ${classname}">
         <img src="${avatar}" alt="${username}/>
         <div class="chat-list__item-text">${text}</div>
@@ -218,11 +226,13 @@ const renderUserInfo = ({username,avatar,email,isOnline})=>`
 
 `;
 
-const selectUserListItem=(item,user,chatPannel)=> {
+const selectUserListItem=(item)=> {
+
+  const receiverDiv =document.querySelector('#receiver');
 
   item.addEventListener('click',async () =>{
 
-    const receiverDiv =document.querySelector('#receiver');
+
 
     if(!item.classList.contains('is-active')){
       item.classList.add('is-active');
@@ -258,19 +268,21 @@ const selectUserListItem=(item,user,chatPannel)=> {
 
     if(id){
       receiverDiv.classList.add(id);
-
     }
-    await populateChat(id,user,chatPannel);
+
+    await populateChat(id);
   });
+
+
 
 };
 
-const getHasConversation =(pannel,id)=>{
+const getHasConversation =(id)=>{
 
   var BreakException = {};
   let hasConversation = false;
 
-  pannel.childNodes.forEach(node=>{
+  document.querySelector('#inbox').childNodes.forEach(node=>{
     try{
       if (node.id==id){
         hasConversation=true;
@@ -292,10 +304,13 @@ const renderInboxInfo =(text,{avatar,username,isOnline})=>`
 <div class="indicator">${isOnline?'online':'off'}</div>
 `;
 
-const renderInboxItems = async (inboxPannel,user) =>{
+const renderInboxItems = async () =>{
+
+  const userId = document.querySelector('#user-profile').classList[0];
+
 
   const inboxData = await app.service('messages').find({query:{
-    receiverId:user.id,
+    receiverId:userId,
     $sort:{
       createdAt:1
     }
@@ -304,12 +319,12 @@ const renderInboxItems = async (inboxPannel,user) =>{
   inboxData.data.map(({text,senderId,sender})=>{
     console.log(senderId);
 
-    const hasConversation = getHasConversation(inboxPannel,senderId);
+    const hasConversation = getHasConversation(senderId);
 
     if(hasConversation){
       document.getElementById(senderId).innerHTML=renderInboxInfo(text,sender);
     }else{
-      inboxPannel.innerHTML +=`
+      document.querySelector('#inbox').innerHTML +=`
     <div id="${senderId}">
     ${renderInboxInfo(text,sender)}
 </div>
@@ -328,8 +343,12 @@ const main = async()=>{
   try{
     // if logged in, load profile
     const {user} = await app.reAuthenticate();
-    console.log(user);
+
+
+
     mainContainer.innerHTML=profilePage(user);
+
+
 
     const logoutBtn = document.querySelectorAll('#logout')[0];
 
@@ -338,35 +357,37 @@ const main = async()=>{
       location.reload();
     });
 
-    // users list
+    const userId = document.querySelector('#user-profile').classList[0];
 
 
-    const chatPannel = document.querySelector('#chat-list');
-    const usersListPannel = document.querySelector('#users-list');
-    const inboxPannel = document.querySelector('#inbox');
-    const groupsPannel = document.querySelector('#groups');
 
     const {data}= await app.service('users').find({
       query:{
         id:{
-          $ne:user&&user.id
+          $ne:userId
         }
       }
     });
 
 
 
-    await renderInboxItems(inboxPannel,user);
+    await renderInboxItems();
 
     app.service('messages').on('created',async()=>{
-      await renderInboxItems(inboxPannel,user);
+      const receiverId = document.getElementById('receiver').classList[0];
+      await Promise.all(
+        [
+          renderInboxItems(),
+          populateChat(receiverId)
+        ]
+      );
     });
 
     data.forEach(({id,...user})=>{
     // check has conversation
-      const hasConversation = getHasConversation(inboxPannel,id);
+      const hasConversation = getHasConversation(id);
       if(!hasConversation){
-        usersListPannel.innerHTML+=`
+        document.querySelector('#users-list').innerHTML+=`
   <div id="${id}" class='users-list__item'>
   ${renderUserInfo(user)}
   </div>
@@ -376,24 +397,23 @@ const main = async()=>{
     });
 
 
-    app.service('users').on('patched',async({user})=>{
-      const parentDiv = document.getElementById(user.id);
-      if(user&&parentDiv){
+    app.service('users').on('patched',async(user)=>{
+
+      const parentDiv = document.getElementById(userId);
+      console.log(parentDiv);
+      if(parentDiv){
         parentDiv.innerHTML=renderUserInfo(user);
       }
     });
 
-    inboxPannel.childNodes.forEach((item)=>selectUserListItem(item,user,chatPannel));
-    usersListPannel.childNodes.forEach((item)=>selectUserListItem(item,user,chatPannel));
-    groupsPannel.childNodes.forEach((item)=>selectUserListItem(item,user,chatPannel));
+    document.querySelector('#inbox').childNodes.forEach(selectUserListItem);
+    document.querySelector('#users-list').childNodes.forEach(selectUserListItem);
+    document.querySelector('#groups').childNodes.forEach(selectUserListItem);
 
 
-    // chat
 
-    const receiverId=document.querySelector('#receiver').classList[0]||null;
 
-    await populateChat(receiverId,user,chatPannel);
-
+    await populateChat(null);
 
 
     document.querySelector('input[name=text-box]')
