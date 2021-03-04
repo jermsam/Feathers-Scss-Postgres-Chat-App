@@ -1,0 +1,351 @@
+.profile-container{
+  height: 100%;
+  min-height:80vh;
+  display:grid;
+  grid-template-columns: 1fr 2fr 1fr;
+
+  background:linear-gradient(to right bottom, transparent 0%,rgba(255,255,255,1));
+  border-radius: 1rem;
+  padding: 1rem;
+
+
+
+    z-index: 2;
+    backdrop-filter: blur(20rem);
+    position: relative;
+}
+
+#menu,#conversations{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+%items{
+
+
+  padding:  1rem;
+  margin: 1rem;
+
+
+   .name{
+     margin:1rem
+   }
+}
+
+.users-list__item, #inbox >div{
+  position: relative;
+
+  .indicator{
+    width:1.5rem;
+    height:1.5rem;
+    border-radius: 50%;
+    background:var(--background);
+    position:absolute;
+    top:-0.25rem;
+    left:-0.25rem;
+  }
+
+}
+
+.users-list__item{
+  position : relative;
+  border-radius: 1rem;
+    color:$off;
+    font-size: 0.8rem;
+    border-bottom: 1px solid darken($off,20%);
+    padding: 1rem;
+    margin-bottom:0.5rem;
+    background:$light;
+   &:hover, &.active {
+   background:linear-gradient(to left top,$primary 10%, #fff 80%);
+    }
+
+    &:hover{
+        cursor: pointer;
+    }
+
+    .name{
+      font-weight: bold;
+      @extend %overflow-style;
+      margin: 0 0.3rem;
+  }
+    display:flex;
+    flex-direction: column-reverse;
+
+align-items: center;
+align-content: center;
+
+
+
+}
+
+.users-list__item > img{
+  width:2rem;
+  height:2rem;
+  cursor: pointer;
+
+  object-fit: cover;
+  border-radius: 100%;
+  grid-row: span 2;
+}
+
+#groups >div{
+  border-bottom: 1px solid darken($off,20%);
+}
+
+#user-profile, #groups >div{
+  display: flex;
+  flex-direction:column;
+ align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+  margin: 0.7rem;
+  padding: 0.7rem;
+  border-radius: 0.7rem;
+  cursor: pointer;
+    img{
+      width:2rem;
+      height:2rem;
+
+
+      object-fit: cover;
+      border-radius: 0.7rem;
+      grid-row: span 2;
+    }
+
+    h3{
+      font-size:1.5rem;
+    }
+
+    .email{
+      font-size:0.6rem;
+    }
+
+}
+
+%overflow-style{
+  padding-left: 5px;
+      white-space: nowrap;
+      overflow-x: hidden;
+      text-overflow: ellipsis;
+}
+
+
+#inbox{
+  border-radius: 1rem;
+background: transparent;
+
+  height: 80%;
+  max-height: 29rem;
+
+  width: 100%;
+  margin-top:1.5rem;
+  padding:1rem;
+
+  overflow-y: scroll;
+
+}
+
+
+.conversation{
+  position : relative;
+border-radius: 1rem;
+  color:$off;
+  font-size: 0.8rem;
+  border-bottom: 1px solid darken($off,20%);
+  padding: 1rem;
+  margin-bottom:0.5rem;
+  background:$light;
+ &:hover, &.active {
+ background:linear-gradient(to right bottom, $primary 10%, #fff 90%);
+  }
+
+  &:hover{
+      cursor: pointer;
+  }
+  .name{
+      font-weight: bold;
+      @extend %overflow-style;
+  }
+  &-date{
+      font-size: 0.6rem;
+  }
+  display:grid;
+  grid-template-columns: 20px 2fr max-content;
+  gap:10px;
+  &-msg{
+      @extend %overflow-style;
+      grid-column: span 2;
+      font-size: 0.7rem;
+  }
+  img{
+    width:2rem;
+    height:2rem;
+    cursor: pointer;
+
+    object-fit: cover;
+    border-radius: 100%;
+    grid-row: span 2;
+  }
+
+}
+
+
+::-webkit-scrollbar{
+  display: none;
+}
+
+#chat{
+
+  background:linear-gradient(to right top, $light 10%, transparent 90%);
+  border-radius:1rem;
+  padding:1rem;
+display:flex;
+flex-direction: column;
+justify-content: flex-end;
+
+  &-header{
+display: none;
+
+  }
+
+  &-list{
+    width: 100%;
+    height: 100%;
+    max-height: 65vh;
+    background: transparent;
+    border-radius:0.75rem;
+    display: flex;
+           flex-direction: column-reverse;
+            padding: 0 1rem;
+        overflow-y: scroll;
+  }
+
+  &-inputs{
+    background:$light;
+    height: 10%;
+
+    border-radius: 0 0 10px 0;
+    padding:1rem;
+
+    display: grid;
+    grid-template-columns: 6fr 1fr;
+    align-items: center;
+    align-content:center;
+    justify-items: center;
+    justify-content: center;
+    input{
+        color:$off;
+        background:lighten($primary,30%);
+        outline: none;
+        border-radius: 10px;
+        height: 30px;
+        width:100%;
+        border:2px solid $light;
+        padding: 25px 15px ;
+
+
+        &::placeholder{
+            color:$off;
+
+        }
+    }
+    img{
+      width:2rem;
+      height:2rem;
+      cursor: pointer;
+
+
+  }
+  }
+
+
+  .chat-message{
+    margin-bottom: 0.5rem;
+      display: grid;
+      grid-template-columns: 70%;
+
+      img{
+          cursor: pointer;
+          width: 2.5rem;
+          height: 2.5rem;
+          object-fit: cover;
+          border-radius: 100%;
+          grid-row: span 2;
+
+      }
+
+
+
+      &__text{
+        padding: 0.5rem;
+        font-size: 0.8rem;
+      margin-bottom: 0;
+
+      }
+
+
+
+      &__time{
+        color:lighten($off,20%);
+        font-size: 0.6rem;
+      }
+
+      &__content{
+        display: grid;
+      margin-top: 2rem;
+
+      }
+
+
+  }
+
+
+  .you img{
+     display:none;
+   }
+
+   .you .chat-message__text{
+    background:$primary;
+    color:$light;
+    border: 1px solid $primary;
+    border-radius: 14px 14px 0 14px;
+  }
+
+  .other .chat-message__text{
+    background:$light;
+  color:$off;
+  border: 1px solid $primary;
+  border-radius: 14px 14px 14px 0;
+  }
+
+  .you .chat-message__content{
+    justify-items: end;
+  }
+
+  .other .chat-message__content{
+    grid-template-columns: 28px 1fr;
+    gap:0.95rem;
+  }
+
+  .you {
+    justify-content:end;
+    justify-items: end;
+
+  }
+
+  .other{
+    justify-content:start;
+    justify-items: start;
+  }
+
+}
+
+
+
+
+

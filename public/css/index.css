@@ -1,5 +1,18 @@
 .form {
+  max-width: 50vw;
+  height: 100%;
+  min-height: 60vh;
+  background: linear-gradient(to right bottom, transparent 0%, white);
+  border-radius: 1rem;
+  padding: 5rem;
+  z-index: 2;
+  -webkit-backdrop-filter: blur(20rem);
+          backdrop-filter: blur(20rem);
+  position: relative;
   font-size: 1.5rem;
+}
+.form-control {
+  margin-bottom: 2rem;
 }
 .form .toggle-container {
   text-align: center;
@@ -30,11 +43,299 @@
   outline: none;
 }
 .form button:hover, .form button:active {
-  background: cornflowerblue;
+  background: #8b85ff;
   color: aliceblue;
 }
 .form button:active {
   outline: 1px solid #475347;
+}
+
+.isemail > span, .isuppercase > span, .islowercase > span, .eightchar > span, .isnumber > span {
+  color: #09cc09;
+}
+.isemail > span.error, .isuppercase > span.error, .islowercase > span.error, .eightchar > span.error, .isnumber > span.error {
+  color: #d30f40;
+}
+
+#generalPrompt {
+  color: #d30f40;
+}
+
+.profile-container {
+  height: 100%;
+  min-height: 80vh;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  background: linear-gradient(to right bottom, transparent 0%, white);
+  border-radius: 1rem;
+  padding: 1rem;
+  z-index: 2;
+  -webkit-backdrop-filter: blur(20rem);
+          backdrop-filter: blur(20rem);
+  position: relative;
+}
+
+#menu, #conversations {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.users-list__item, #inbox > div {
+  position: relative;
+}
+.users-list__item .indicator, #inbox > div .indicator {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: var(--background);
+  position: absolute;
+  top: -0.25rem;
+  left: -0.25rem;
+}
+
+.users-list__item {
+  position: relative;
+  border-radius: 1rem;
+  color: #475347;
+  font-size: 0.8rem;
+  border-bottom: 1px solid #181c18;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  background: aliceblue;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  align-content: center;
+}
+.users-list__item:hover, .users-list__item.active {
+  background: linear-gradient(to left top, #8b85ff 10%, #fff 80%);
+}
+.users-list__item:hover {
+  cursor: pointer;
+}
+.users-list__item .name {
+  font-weight: bold;
+  margin: 0 0.3rem;
+}
+
+.users-list__item > img {
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 100%;
+  grid-row: span 2;
+}
+
+#groups > div {
+  border-bottom: 1px solid #181c18;
+}
+
+#user-profile, #groups > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 0.7rem;
+  padding: 0.7rem;
+  border-radius: 0.7rem;
+  cursor: pointer;
+}
+#user-profile img, #groups > div img {
+  width: 2rem;
+  height: 2rem;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 0.7rem;
+  grid-row: span 2;
+}
+#user-profile h3, #groups > div h3 {
+  font-size: 1.5rem;
+}
+#user-profile .email, #groups > div .email {
+  font-size: 0.6rem;
+}
+
+.conversation-msg, .conversation .name, .users-list__item .name {
+  padding-left: 5px;
+  white-space: nowrap;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+}
+
+#inbox {
+  border-radius: 1rem;
+  background: transparent;
+  height: 80%;
+  max-height: 29rem;
+  width: 100%;
+  margin-top: 1.5rem;
+  padding: 1rem;
+  overflow-y: scroll;
+}
+
+.conversation {
+  position: relative;
+  border-radius: 1rem;
+  color: #475347;
+  font-size: 0.8rem;
+  border-bottom: 1px solid #181c18;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  background: aliceblue;
+  display: grid;
+  grid-template-columns: 20px 2fr -webkit-max-content;
+  grid-template-columns: 20px 2fr max-content;
+  gap: 10px;
+}
+.conversation:hover, .conversation.active {
+  background: linear-gradient(to right bottom, #8b85ff 10%, #fff 90%);
+}
+.conversation:hover {
+  cursor: pointer;
+}
+.conversation .name {
+  font-weight: bold;
+}
+.conversation-date {
+  font-size: 0.6rem;
+}
+.conversation-msg {
+  grid-column: span 2;
+  font-size: 0.7rem;
+}
+.conversation img {
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 100%;
+  grid-row: span 2;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+#chat {
+  background: linear-gradient(to right top, aliceblue 10%, transparent 90%);
+  border-radius: 1rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+#chat-header {
+  display: none;
+}
+#chat-list {
+  width: 100%;
+  height: 100%;
+  max-height: 65vh;
+  background: transparent;
+  border-radius: 0.75rem;
+  display: flex;
+  flex-direction: column-reverse;
+  padding: 0 1rem;
+  overflow-y: scroll;
+}
+#chat-inputs {
+  background: aliceblue;
+  height: 10%;
+  border-radius: 0 0 10px 0;
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: 6fr 1fr;
+  align-items: center;
+  align-content: center;
+  justify-items: center;
+  justify-content: center;
+}
+#chat-inputs input {
+  color: #475347;
+  background: white;
+  outline: none;
+  border-radius: 10px;
+  height: 30px;
+  width: 100%;
+  border: 2px solid aliceblue;
+  padding: 25px 15px;
+}
+#chat-inputs input::-moz-placeholder {
+  color: #475347;
+}
+#chat-inputs input:-ms-input-placeholder {
+  color: #475347;
+}
+#chat-inputs input::placeholder {
+  color: #475347;
+}
+#chat-inputs img {
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+}
+#chat .chat-message {
+  margin-bottom: 0.5rem;
+  display: grid;
+  grid-template-columns: 70%;
+}
+#chat .chat-message img {
+  cursor: pointer;
+  width: 2.5rem;
+  height: 2.5rem;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 100%;
+  grid-row: span 2;
+}
+#chat .chat-message__text {
+  padding: 0.5rem;
+  font-size: 0.8rem;
+  margin-bottom: 0;
+}
+#chat .chat-message__time {
+  color: #768a76;
+  font-size: 0.6rem;
+}
+#chat .chat-message__content {
+  display: grid;
+  margin-top: 2rem;
+}
+#chat .you img {
+  display: none;
+}
+#chat .you .chat-message__text {
+  background: #8b85ff;
+  color: aliceblue;
+  border: 1px solid #8b85ff;
+  border-radius: 14px 14px 0 14px;
+}
+#chat .other .chat-message__text {
+  background: aliceblue;
+  color: #475347;
+  border: 1px solid #8b85ff;
+  border-radius: 14px 14px 14px 0;
+}
+#chat .you .chat-message__content {
+  justify-items: end;
+}
+#chat .other .chat-message__content {
+  grid-template-columns: 28px 1fr;
+  gap: 0.95rem;
+}
+#chat .you {
+  justify-content: end;
+  justify-items: end;
+}
+#chat .other {
+  justify-content: start;
+  justify-items: start;
 }
 
 * {
@@ -70,59 +371,33 @@ button, a {
   cursor: pointer;
 }
 
-.isemail > span, .isuppercase > span, .islowercase > span, .eightchar > span, .isnumber > span {
-  color: #09cc09;
-}
-.isemail > span.error, .isuppercase > span.error, .islowercase > span.error, .eightchar > span.error, .isnumber > span.error {
-  color: #d30f40;
-}
-
-#generalPrompt {
-  color: #d30f40;
-}
-
 .is-active {
-  background-color: cornflowerblue;
+  background-color: #8b85ff;
   color: aliceblue;
 }
 
-.users-list__item, #user-profile, #groups > div, #inbox > div {
-  cursor: pointer;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  border-bottom: 0.2rem solid aliceblue;
-  padding: 1rem;
-  margin: 1rem;
-}
-.users-list__item img, #user-profile img, #groups > div img, #inbox > div img {
-  width: 3rem;
-  height: 3rem;
-  border-radius: 50%;
-}
-.users-list__item .name, #user-profile .name, #groups > div .name, #inbox > div .name {
-  margin: 1rem;
-}
-
-#user-profile .email {
-  display: none;
-}
-
-.users-list__item .email, .users-list__item .indicator {
-  display: none;
-}
-
-.home {
+.home, .profile {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background: linear-gradient(to top right, cornflowerblue 0%, aliceblue 50%);
+  background: linear-gradient(to top right, #8b85ff 0%, aliceblue 70%);
 }
-.home h2 {
+.home h2, .profile h2 {
   text-align: center;
   font-size: 4rem;
   font-weight: bold;
   margin: 1rem;
+}
+
+.profile {
+  background-color: #8b85ff;
+}
+
+.secondary--btn {
+  width: 100%;
+  height: 3rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
 }/*# sourceMappingURL=index.css.map */

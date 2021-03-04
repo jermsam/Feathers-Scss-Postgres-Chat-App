@@ -2,6 +2,7 @@
 @import 'colors';
 @import 'form';
 
+@import 'profile-container';
 
 * {
   margin: 0;
@@ -40,21 +41,9 @@ button,a{
 
 
 
-.isemail >span, .isuppercase>span, .islowercase>span, .eightchar>span, .isnumber>span{
-  color:$valid;
 
-  &.error{
-    color:$error;
-  }
-}
 
-#generalPrompt{
-  color:$error;
-}
 
-.is-active{
-  @extend %active;
-}
 
 %active{
   background-color:$primary;
@@ -65,61 +54,42 @@ button,a{
   @extend %active;
 }
 
-%items{
-  cursor:pointer;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  border-bottom: 0.2rem solid $light;
-  padding:  1rem;
-  margin: 1rem;
-   img{
-     width:3rem;
-     height:3rem;
-     border-radius: 50%;
-   }
 
-   .name{
-     margin:1rem
-   }
-}
 
-#groups > div,#inbox >div{
 
-@extend %items;
-}
 
-#user-profile{
-  @extend %items;
 
-  .email{
-    display:none;
-  }
-}
 
-.users-list{
-  &__item {
-    @extend %items;
-    .email, .indicator{
-      display:none;
-    }
-
-  }
-}
 
 // home page
 
-.home{
+.home, .profile{
   display:flex;
   flex-direction:column;
   align-items: center;
   justify-content: center;
   min-height:100vh;
-  background: linear-gradient(to top right, $primary 0%,$light 50%);
+  background: linear-gradient(to top right, $primary 0%,$light 70%);
     h2{
       text-align: center;
       font-size:4rem;
       font-weight: bold;
       margin: 1rem;
     }
+}
+
+
+.profile{
+
+
+  background-color: $primary;
+
+
+}
+
+.secondary--btn{
+  width: 100%;
+  height: 3rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
 }

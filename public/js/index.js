@@ -113,54 +113,64 @@ const homePage =`<div class='home'>
 
 const profilePage= (user)=>`
 <div class="profile">
-<h2>CHAT APP</h2>
+
+
+<div class="profile-container">
 
 <div id='menu'>
 <section id='user-profile' class="${user.id}">
 <img src="${user.avatar}" alt="${user.username}" />
-<div class="name">${user.username}</div>
+<h3>${user.username}</h3>
 <div class="email">${user.email}</div>
 </section>
-<h3>USERS:</h3>
-<section id="users-list">
+<h5>INBOX</h5>
 
+<!-- inbox -->
+<section id="inbox">
 
 </section>
 
+
 <form>
-<button type='submit' id='logout'>Log out</button>
+<button class='secondary--btn' type='submit' id='logout'>Log out</button>
 </form>
 </div>
 
 <div id="chat">
 <section id="chat-header">
-CHATING WITH:
-<div id="receiver" >Public </div>
+
+<div id="receiver" >public </div>
 </section>
 
 <section id="chat-list"></section>
 
 <section id="chat-inputs">
   <input type="text" name="text-box"  placeholder="Send text" />
+  <div><img src="https://i.imgur.com/v7oUwbD.png" alt="add attachment"></div>
 </section>
 </div>
 <div id='conversations'>
 
 <!-- groups -->
-<h3>Groups:</h3>
+
+<h5>GROUPS</h5>
 <section id="groups">
   <div id="" class='is-active'>
-    <img src="https://image.flaticon.com/icons/png/512/32/32441.png" alt="public" />
-    <div class="name">
+<image src="https://image.flaticon.com/icons/png/512/32/32441.png" alt='public'/>
+    <h4>
     Public
-    </div>
+    </h4>
   </div>
 </section>
-<h3>INBOX:</h3>
-<!-- inbox -->
-<section id="inbox">
+
+<h5>USERS</h5>
+
+<section id="users-list">
+
 
 </section>
+</div>
+
 </div>
 
 </div>
@@ -183,12 +193,12 @@ const populateChat = async(receiverId)=>{
     ]
     ,
     $sort:{
-      createdAt:1
+      createdAt:-1
     }
   }:{
     receiverId:null,
     $sort:{
-      createdAt:1
+      createdAt:-1
     }
   };
   const chatMsgResponse = await app.service('messages').find({
@@ -199,15 +209,21 @@ const populateChat = async(receiverId)=>{
 
   chatMsgResponse.data.forEach(
     ({text,createdAt,sender:{id,avatar,username}})=>{
-      const classname = id!=userId ? 'yours':'others';
+      const ownerClass = id==userId ? 'you':'other';
 
-      document.querySelector('#chat-list').innerHTML +=`
-      <div class="chat-list__item ${classname}">
-        <img src="${avatar}" alt="${username}/>
-        <div class="chat-list__item-text">${text}</div>
-        <div class="chat-list__item-date">${createdAt}</div>
+
+      document.querySelector('#chat-list').innerHTML += ` <div class="chat-message ${ownerClass}">
+      <div class="chat-message__content">
+      <img src="${avatar}" alt="${username}">
+
+       <div class="chat-message__text">
+      ${text}
+       </div>
+       <div class="chat-message__time">
+       ${ moment(createdAt).fromNow()}
+       </div>
       </div>
-      `;
+      </div>`;
 
 
     }
@@ -217,12 +233,11 @@ const populateChat = async(receiverId)=>{
 
 const mainContainer = document.querySelector('.container');
 
-const renderUserInfo = ({username,avatar,email,isOnline})=>`
+const renderUserInfo = (isOnline,username,avatar)=>`
+      <div class="name">${username}</div>
+      <img src="${avatar}" alt="${username}"/>
 
-      <img src="${avatar}" name="${username}"/>
-      <div  class="name">${username}</div>
-      <div class="email">${email}</div>
-      <div class="indicator">${isOnline?'online':'offline'}</div>
+      <div class="indicator" style="--background:${isOnline?'rgb(9, 204, 9)':'rgb(71, 83, 71)'};" />
 
 `;
 
@@ -296,12 +311,19 @@ const getHasConversation =(id)=>{
   return hasConversation;
 };
 
-const renderInboxInfo =(text,{avatar,username,isOnline})=>`
+const renderInboxInfo =(text,createdAt,{avatar,username,isOnline})=>`
 <img src="${avatar}" name="${username}"/>
-<div  class="name" style="display:none;">${username}</div>
-<div>
-<div class="text">${text}</div>
-<div class="indicator">${isOnline?'online':'off'}</div>
+      <div class="name">
+          ${username}
+      </div>
+      <div class="conversation-date">
+      ${ moment(createdAt).fromNow()}
+      </div>
+      <div class="conversation-msg">
+      ${text}
+      </div>
+<div class="indicator" style="--background:${isOnline?'rgb(9, 204, 9)':'rgb(71, 83, 71)'}" />
+
 `;
 
 const renderInboxItems = async () =>{
@@ -316,17 +338,18 @@ const renderInboxItems = async () =>{
     }
   }});
 
-  inboxData.data.map(({text,senderId,sender})=>{
+  inboxData.data.map(({text,createdAt,senderId,sender})=>{
     console.log(senderId);
 
     const hasConversation = getHasConversation(senderId);
 
     if(hasConversation){
-      document.getElementById(senderId).innerHTML=renderInboxInfo(text,sender);
+      document.getElementById(senderId).innerHTML=renderInboxInfo(text,createdAt,sender);
     }else{
       document.querySelector('#inbox').innerHTML +=`
-    <div id="${senderId}">
-    ${renderInboxInfo(text,sender)}
+
+    <div id="${senderId}" class="conversation">
+    ${renderInboxInfo(text,createdAt,sender)}
 </div>
 
 </div>
@@ -339,6 +362,8 @@ const renderInboxItems = async () =>{
 
 
 const main = async()=>{
+
+
 
   try{
     // if logged in, load profile
@@ -383,13 +408,13 @@ const main = async()=>{
       );
     });
 
-    data.forEach(({id,...user})=>{
+    data.forEach(({id,avatar,username,isOnline})=>{
     // check has conversation
       const hasConversation = getHasConversation(id);
       if(!hasConversation){
         document.querySelector('#users-list').innerHTML+=`
   <div id="${id}" class='users-list__item'>
-  ${renderUserInfo(user)}
+  ${renderUserInfo(isOnline,username,avatar)}
   </div>
   `;
       }
@@ -397,12 +422,12 @@ const main = async()=>{
     });
 
 
-    app.service('users').on('patched',async(user)=>{
+    app.service('users').on('patched',async({id,isOnline,username,avatar})=>{
 
-      const parentDiv = document.getElementById(user.id);
+      const parentDiv = document.getElementById(id);
       console.log(parentDiv);
       if(parentDiv){
-        parentDiv.innerHTML=renderUserInfo(user);
+        parentDiv.innerHTML=renderUserInfo(isOnline,username,avatar);
       }
     });
 
@@ -415,6 +440,7 @@ const main = async()=>{
 
     await populateChat(null);
 
+    console.log( document.querySelector('#chat-list'));
 
     document.querySelector('input[name=text-box]')
       .addEventListener('keyup',async({key,target})=>{
@@ -464,6 +490,7 @@ const main = async()=>{
 */
     toggleAnchor.addEventListener('click', () =>{
       const content = toggleAnchor.innerHTML;
+      generalPrompt.innerHTML ='';
       if(content ==='Sign in'){
         toggleAnchor.innerHTML='Sign up';
         toggleSpan.innerHTML='Not registered?';
