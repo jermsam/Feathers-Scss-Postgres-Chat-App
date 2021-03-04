@@ -1,5 +1,24 @@
 
 .form{
+max-width: 50vw;
+  height: 100%;
+  min-height:60vh;
+
+
+  background:linear-gradient(to right bottom, transparent 0%,rgba(255,255,255,1));
+  border-radius: 1rem;
+  padding: 5rem;
+
+
+
+    z-index: 2;
+    backdrop-filter: blur(20rem);
+    position: relative;
+
+    &-control{
+      margin-bottom:2rem;
+    }
+
   font-size:1.5rem;
   .toggle-container{
     text-align: center;
@@ -41,4 +60,16 @@ button{
 }
 }
 
+}
+
+.isemail >span, .isuppercase>span, .islowercase>span, .eightchar>span, .isnumber>span{
+  color:$valid;
+
+  &.error{
+    color:$error;
+  }
+}
+
+#generalPrompt{
+  color:$error;
 }
