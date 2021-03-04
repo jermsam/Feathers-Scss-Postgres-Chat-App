@@ -73,6 +73,7 @@ const validatePassword =(value,isuppercasePrompt,islowercasePrompt,eightcharProm
   return hasNumber*hasEightPlusChars*hasLowercase*hasUppercase;
 };
 
+const mainContainer = document.querySelector('.container');
 
 
 
@@ -93,7 +94,7 @@ const homePage =`<div class='home'>
     <div class="isuppercase">uppercase <span class='error'></span></div>
     <div class="islowercase">lowercase <span></span></div>
     <div class="isnumber">number <span></span></div>
-    <div class="eightchar">8+ character <span></span></div>
+    <div class="eightchar">8+character <span></span></div>
 
   </div>
 </div>
@@ -104,77 +105,190 @@ const homePage =`<div class='home'>
   <button type="submit">Sign Up</button>
 </div>
 <div class="toggle-container">
-  <span>Already registered?</span> <a>Sign in</a>
+  <span>Already registered?</span> <a>Login</a>
 </div>
 </form>
 
 </div>
 `;
 
-const profilePage= (user)=>`
-<div class="profile">
+const profilePage= async(user,x)=> {
+
+  mainContainer.innerHTML=`
+  <div class="profile">
 
 
-<div class="profile-container">
-
-<div id='menu'>
-<section id='user-profile' class="${user.id}">
-<img src="${user.avatar}" alt="${user.username}" />
-<h3>${user.username}</h3>
-<div class="email">${user.email}</div>
-</section>
-<h5>INBOX</h5>
-
-<!-- inbox -->
-<section id="inbox">
-
-</section>
+  <div class="profile-container">
 
 
-<form>
-<button class='secondary--btn' type='submit' id='logout'>Log out</button>
-</form>
-</div>
+  ${!x.matches?`
+  <div id='menu'>
 
-<div id="chat">
-<section id="chat-header">
 
-<div id="receiver" >public </div>
-</section>
 
-<section id="chat-list"></section>
+  <!-- inbox -->
+  <section id="inbox">
+  <h5>INBOX</h5>
 
-<section id="chat-inputs">
-  <input type="text" name="text-box"  placeholder="Send text" />
-  <div><img src="https://i.imgur.com/v7oUwbD.png" alt="add attachment"></div>
-</section>
-</div>
-<div id='conversations'>
-
-<!-- groups -->
-
-<h5>GROUPS</h5>
-<section id="groups">
-  <div id="" class='is-active'>
-<image src="https://image.flaticon.com/icons/png/512/32/32441.png" alt='public'/>
-    <h4>
-    Public
-    </h4>
+  </section>
   </div>
-</section>
-
-<h5>USERS</h5>
-
-<section id="users-list">
+  `:''}
 
 
-</section>
-</div>
 
-</div>
 
+  <div id="chat">
+  <section id="chat-header">
+
+  <div id="receiver" >public </div>
+  </section>
+
+  <section id="chat-list"></section>
+
+  <section id="chat-inputs">
+    <input type="text" name="text-box"  placeholder="Send text" />
+    <div><img src="https://i.imgur.com/v7oUwbD.png" alt="add attachment"></div>
+  </section>
+  </div>
+  <div id='conversations'>
+  <section id='user-profile' class="${user.id}">
+  <img src="${user.avatar}" alt="${user.username}" />
+  <h3>${user.username}</h3>
+  <div class="email">${user.email}</div>
+  <h3>______</h3>
+  </section>
+  <!-- groups -->
+
+
+  <section id="groups">
+  <h5>GROUPS</h5>
+    <div id="" class='is-active'>
+  <image src="https://image.flaticon.com/icons/png/512/32/32441.png" alt='public'/>
+      <h4>
+      public
+      </h4>
+    </div>
+  </section>
+
+  ${x.matches?`
+  <section id="inbox">
+  <h5>INBOX</h5>
+
+  </section>
+  `:''}
+
+
+  <section id="users-list">
+  <h5>USERS</h5>
+
+  </section>
+
+  <section id="mobile-inbox">
+  </section>
+  <form style="padding:1rem;">
+  <button class='secondary--btn' type='submit' id='logout'>Logout</button>
+  </form>
+  </div>
+
+  </div>
+
+  </div>
+  `;
+
+
+
+
+  const logoutBtn = document.querySelectorAll('#logout')[0];
+
+  logoutBtn.addEventListener('click',async()=>{
+    await app.logout();
+    location.reload();
+  });
+
+  const userId = document.querySelector('#user-profile').classList[0];
+
+
+
+  const {data}= await app.service('users').find({
+    query:{
+      id:{
+        $ne:userId
+      }
+    }
+  });
+
+
+
+  await renderInboxItems();
+
+
+
+  app.service('messages').on('created',async()=>{
+    const receiverId = document.getElementById('receiver').classList[0];
+    await Promise.all(
+      [
+        renderInboxItems(),
+        populateChat(receiverId)
+      ]
+    );
+  });
+
+
+
+
+  data.forEach(({id,avatar,username,isOnline})=>{
+  // check has conversation
+    const hasConversation = getHasConversation(id);
+    if(!hasConversation){
+      document.querySelector('#users-list').innerHTML+=`
+<div id="${id}" class='users-list__item'>
+${renderUserInfo(isOnline,username,avatar)}
 </div>
 `;
+    }
+
+  });
+
+
+
+  app.service('users').on('patched',async({id,isOnline,username,avatar})=>{
+
+    const parentDiv = document.getElementById(id);
+    console.log(parentDiv);
+    if(parentDiv){
+      parentDiv.innerHTML=renderUserInfo(isOnline,username,avatar);
+    }
+  });
+
+  document.querySelector('#inbox').childNodes.forEach(selectUserListItem);
+  document.querySelector('#users-list').childNodes.forEach(selectUserListItem);
+  document.querySelector('#groups').childNodes.forEach(selectUserListItem);
+
+
+
+
+  await populateChat(null);
+
+  console.log( document.querySelector('#chat-list'));
+
+  document.querySelector('input[name=text-box]')
+    .addEventListener('keyup',async({key,target})=>{
+
+      if(key=='Enter'&&target.value){
+        const receiverId=document.querySelector('#receiver').classList[0]||null;
+
+        const text = target.value;
+        await app.service('messages').create({text,receiverId});
+        target.value='';
+      }
+
+
+    });
+
+
+};
+
+
 
 const populateChat = async(receiverId)=>{
 
@@ -231,7 +345,6 @@ const populateChat = async(receiverId)=>{
 
 };
 
-const mainContainer = document.querySelector('.container');
 
 const renderUserInfo = (isOnline,username,avatar)=>`
       <div class="name">${username}</div>
@@ -326,6 +439,8 @@ const renderInboxInfo =(text,createdAt,{avatar,username,isOnline})=>`
 
 `;
 
+
+
 const renderInboxItems = async () =>{
 
   const userId = document.querySelector('#user-profile').classList[0];
@@ -338,6 +453,8 @@ const renderInboxItems = async () =>{
     }
   }});
 
+
+
   inboxData.data.map(({text,createdAt,senderId,sender})=>{
     console.log(senderId);
 
@@ -346,14 +463,16 @@ const renderInboxItems = async () =>{
     if(hasConversation){
       document.getElementById(senderId).innerHTML=renderInboxInfo(text,createdAt,sender);
     }else{
-      document.querySelector('#inbox').innerHTML +=`
 
-    <div id="${senderId}" class="conversation">
-    ${renderInboxInfo(text,createdAt,sender)}
-</div>
 
-</div>
-    `;
+      document.querySelector('#inbox').innerHTML+=`
+
+      <div id="${senderId}" class="conversation">
+      ${renderInboxInfo(text,createdAt,sender)}
+  </div>
+
+  </div>
+      `;
     }
 
   });
@@ -369,92 +488,15 @@ const main = async()=>{
     // if logged in, load profile
     const {user} = await app.reAuthenticate();
 
-
-
-    mainContainer.innerHTML=profilePage(user);
-
-
-
-    const logoutBtn = document.querySelectorAll('#logout')[0];
-
-    logoutBtn.addEventListener('click',async()=>{
-      await app.logout();
-      location.reload();
-    });
-
-    const userId = document.querySelector('#user-profile').classList[0];
+    let target =window.matchMedia('(max-width: 780px)');
 
 
 
-    const {data}= await app.service('users').find({
-      query:{
-        id:{
-          $ne:userId
-        }
-      }
-    });
+    await profilePage(user,target);
 
 
+    target.addEventListener('change',async x=>await profilePage(user, x));
 
-    await renderInboxItems();
-
-    app.service('messages').on('created',async()=>{
-      const receiverId = document.getElementById('receiver').classList[0];
-      await Promise.all(
-        [
-          renderInboxItems(),
-          populateChat(receiverId)
-        ]
-      );
-    });
-
-    data.forEach(({id,avatar,username,isOnline})=>{
-    // check has conversation
-      const hasConversation = getHasConversation(id);
-      if(!hasConversation){
-        document.querySelector('#users-list').innerHTML+=`
-  <div id="${id}" class='users-list__item'>
-  ${renderUserInfo(isOnline,username,avatar)}
-  </div>
-  `;
-      }
-
-    });
-
-
-    app.service('users').on('patched',async({id,isOnline,username,avatar})=>{
-
-      const parentDiv = document.getElementById(id);
-      console.log(parentDiv);
-      if(parentDiv){
-        parentDiv.innerHTML=renderUserInfo(isOnline,username,avatar);
-      }
-    });
-
-    document.querySelector('#inbox').childNodes.forEach(selectUserListItem);
-    document.querySelector('#users-list').childNodes.forEach(selectUserListItem);
-    document.querySelector('#groups').childNodes.forEach(selectUserListItem);
-
-
-
-
-    await populateChat(null);
-
-    console.log( document.querySelector('#chat-list'));
-
-    document.querySelector('input[name=text-box]')
-      .addEventListener('keyup',async({key,target})=>{
-
-        if(key=='Enter'&&target.value){
-          const receiverId=document.querySelector('#receiver').classList[0]||null;
-
-          const text = target.value;
-          await app.service('messages').create({text,receiverId});
-          target.value='';
-        }
-
-
-      });
 
 
   }catch(error){
@@ -485,18 +527,18 @@ const main = async()=>{
 
     /**
  * add a click event listener that
- 1.toggles the its content from Sign up to Sign in
+ 1.toggles the its content from Sign up to Login
  2.toggles the content of the span element which is its sibling form "Already registered" to "Not registered?"
 */
     toggleAnchor.addEventListener('click', () =>{
       const content = toggleAnchor.innerHTML;
       generalPrompt.innerHTML ='';
-      if(content ==='Sign in'){
+      if(content ==='Login'){
         toggleAnchor.innerHTML='Sign up';
         toggleSpan.innerHTML='Not registered?';
-        submitButton.innerHTML='Sign In';
+        submitButton.innerHTML='Login';
       }else{
-        toggleAnchor.innerHTML='Sign in';
+        toggleAnchor.innerHTML='Login';
         toggleSpan.innerHTML='Already registered?';
         submitButton.innerHTML='Sign Up';
       }
@@ -506,7 +548,7 @@ const main = async()=>{
     /**
  * Now depending on the type of form, we can determine the action that our submit button renders.
  * ~ if it says Sign Up then when clicked it should run the function for registering the user
- * ~ if it says Sign In then it should un the function that logs in the user
+ * ~ if it says Login then it should un the function that logs in the user
 */
     submitButton.addEventListener('click',async(e)=>{
       e.preventDefault();

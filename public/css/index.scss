@@ -1,5 +1,6 @@
 
 @import 'colors';
+@import 'media-queries';
 @import 'form';
 
 @import 'profile-container';
@@ -68,6 +69,7 @@ button,a{
   flex-direction:column;
   align-items: center;
   justify-content: center;
+
   min-height:100vh;
   background: linear-gradient(to top right, $primary 0%,$light 70%);
     h2{
@@ -90,6 +92,9 @@ button,a{
 .secondary--btn{
   width: 100%;
   height: 3rem;
-  margin-bottom: 1.5rem;
+  @include tablet{
+    padding: 0.2rem;
+
+    }
   padding: 1rem;
 }

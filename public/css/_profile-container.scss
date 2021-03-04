@@ -2,7 +2,11 @@
   height: 100%;
   min-height:80vh;
   display:grid;
-  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-columns: 2fr 4fr 1fr;
+
+  @include tablet{
+    grid-template-columns: 4fr 1fr;
+ }
 
   background:linear-gradient(to right bottom, transparent 0%,rgba(255,255,255,1));
   border-radius: 1rem;
@@ -19,7 +23,23 @@
   display:flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
+
+
+}
+
+#menu{
+  justify-content: start;
+  @include tablet{
+    display:none;
+ }
+}
+
+#conversations{
+  justify-content: space-between;
+  @include tablet{
+    font-size:0.9rem;
+
+   }
 }
 
 %items{
@@ -40,16 +60,29 @@
   .indicator{
     width:1.5rem;
     height:1.5rem;
+    @include tablet{
+      width:0.9rem;
+      height:0.9rem;
+
+   }
     border-radius: 50%;
     background:var(--background);
     position:absolute;
     top:-0.25rem;
     left:-0.25rem;
+
   }
+
+
 
 }
 
 .users-list__item{
+  @include tablet{
+    flex-direction:row;
+    padding: 0.5rem;
+ }
+
   position : relative;
   border-radius: 1rem;
     color:$off;
@@ -84,6 +117,10 @@ align-content: center;
 .users-list__item > img{
   width:2rem;
   height:2rem;
+  @include tablet{
+    width:1.5rem;
+    height:1.5rem;
+ }
   cursor: pointer;
 
   object-fit: cover;
@@ -93,6 +130,9 @@ align-content: center;
 
 #groups >div{
   border-bottom: 1px solid darken($off,20%);
+  @include tablet{
+    font-size:0.7rem;
+   }
 }
 
 #user-profile, #groups >div{
@@ -107,11 +147,14 @@ align-content: center;
   padding: 0.7rem;
   border-radius: 0.7rem;
   cursor: pointer;
+
     img{
       width:2rem;
       height:2rem;
-
-
+@include tablet{
+  width:1.2rem;
+  height:1.2rem;
+ }
       object-fit: cover;
       border-radius: 0.7rem;
       grid-row: span 2;
@@ -125,6 +168,12 @@ align-content: center;
       font-size:0.6rem;
     }
 
+}
+
+#user-profile{
+  @include tablet{
+ display:none;
+ }
 }
 
 %overflow-style{
@@ -153,11 +202,15 @@ background: transparent;
 
 .conversation{
   position : relative;
+  min-width: 100%;
 border-radius: 1rem;
   color:$off;
   font-size: 0.8rem;
   border-bottom: 1px solid darken($off,20%);
   padding: 1rem;
+  @include tablet{
+    padding: 0.2rem;
+    }
   margin-bottom:0.5rem;
   background:$light;
  &:hover, &.active {
@@ -186,14 +239,24 @@ border-radius: 1rem;
     width:2rem;
     height:2rem;
     cursor: pointer;
-
+    @include tablet{
+      width:1.8rem;
+      height:1.8rem;
+      margin-top:0.3rem ;
+      }
     object-fit: cover;
     border-radius: 100%;
     grid-row: span 2;
   }
 
+
+
 }
 
+h5{
+  text-align: center;
+  margin-bottom:1rem;
+}
 
 ::-webkit-scrollbar{
   display: none;
@@ -203,7 +266,7 @@ border-radius: 1rem;
 
   background:linear-gradient(to right top, $light 10%, transparent 90%);
   border-radius:1rem;
-  padding:1rem;
+
 display:flex;
 flex-direction: column;
 justify-content: flex-end;
@@ -218,7 +281,7 @@ display: none;
     height: 100%;
     max-height: 65vh;
     background: transparent;
-    border-radius:0.75rem;
+    border-radius:1rem;
     display: flex;
            flex-direction: column-reverse;
             padding: 0 1rem;
@@ -229,7 +292,7 @@ display: none;
     background:$light;
     height: 10%;
 
-    border-radius: 0 0 10px 0;
+    border-radius:1rem;
     padding:1rem;
 
     display: grid;
@@ -267,7 +330,7 @@ display: none;
   .chat-message{
     margin-bottom: 0.5rem;
       display: grid;
-      grid-template-columns: 70%;
+      grid-template-columns: 80%;
 
       img{
           cursor: pointer;
