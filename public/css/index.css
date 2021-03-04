@@ -107,6 +107,7 @@
 
 #conversations {
   justify-content: space-between;
+  max-width: 100%;
 }
 @media screen and (max-width: 768px) {
   #conversations {
@@ -247,7 +248,7 @@
 
 .conversation {
   position: relative;
-  min-width: 100%;
+  min-width: 3rem;
   border-radius: 1rem;
   color: #475347;
   font-size: 0.8rem;
@@ -256,8 +257,8 @@
   margin-bottom: 0.5rem;
   background: aliceblue;
   display: grid;
-  grid-template-columns: 20px 2fr -webkit-max-content;
-  grid-template-columns: 20px 2fr max-content;
+  grid-template-columns: 30px 2fr -webkit-max-content;
+  grid-template-columns: 30px 2fr max-content;
   gap: 10px;
 }
 @media screen and (max-width: 768px) {
@@ -276,6 +277,7 @@
 }
 .conversation-date {
   font-size: 0.6rem;
+  min-width: 3rem;
 }
 .conversation-msg {
   grid-column: span 2;
@@ -292,8 +294,8 @@
 }
 @media screen and (max-width: 768px) {
   .conversation img {
-    width: 1.8rem;
-    height: 1.8rem;
+    width: 1.5rem;
+    height: 1.5rem;
     margin-top: 0.3rem;
   }
 }
@@ -308,6 +310,7 @@ h5 {
 }
 
 #chat {
+  width: 100%;
   background: linear-gradient(to right top, aliceblue 10%, transparent 90%);
   border-radius: 1rem;
   display: flex;

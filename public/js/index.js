@@ -223,19 +223,6 @@ const profilePage= async(user,x)=> {
 
 
 
-  app.service('messages').on('created',async()=>{
-    const receiverId = document.getElementById('receiver').classList[0];
-    await Promise.all(
-      [
-        renderInboxItems(),
-        populateChat(receiverId)
-      ]
-    );
-  });
-
-
-
-
   data.forEach(({id,avatar,username,isOnline})=>{
   // check has conversation
     const hasConversation = getHasConversation(id);
@@ -251,14 +238,7 @@ ${renderUserInfo(isOnline,username,avatar)}
 
 
 
-  app.service('users').on('patched',async({id,isOnline,username,avatar})=>{
 
-    const parentDiv = document.getElementById(id);
-    console.log(parentDiv);
-    if(parentDiv){
-      parentDiv.innerHTML=renderUserInfo(isOnline,username,avatar);
-    }
-  });
 
   document.querySelector('#inbox').childNodes.forEach(selectUserListItem);
   document.querySelector('#users-list').childNodes.forEach(selectUserListItem);
@@ -424,17 +404,17 @@ const getHasConversation =(id)=>{
   return hasConversation;
 };
 
-const renderInboxInfo =(text,createdAt,{avatar,username,isOnline})=>`
+const renderInboxInfo =({text,createdAt,sender:{avatar,username,isOnline}})=>`
 <img src="${avatar}" name="${username}"/>
-      <div class="name">
-          ${username}
-      </div>
-      <div class="conversation-date">
-      ${ moment(createdAt).fromNow()}
-      </div>
-      <div class="conversation-msg">
-      ${text}
-      </div>
+<div class="name">
+${username}
+</div>
+<div class="conversation-date">
+${ moment(createdAt).fromNow()}
+</div>
+<div class="conversation-msg">
+${text}
+</div>
 <div class="indicator" style="--background:${isOnline?'rgb(9, 204, 9)':'rgb(71, 83, 71)'}" />
 
 `;
@@ -455,20 +435,19 @@ const renderInboxItems = async () =>{
 
 
 
-  inboxData.data.map(({text,createdAt,senderId,sender})=>{
-    console.log(senderId);
+  inboxData.data.map((msg)=>{
 
-    const hasConversation = getHasConversation(senderId);
+    const hasConversation = getHasConversation(msg.senderId);
 
     if(hasConversation){
-      document.getElementById(senderId).innerHTML=renderInboxInfo(text,createdAt,sender);
+      document.getElementById(msg.senderId).innerHTML=renderInboxInfo(msg);
     }else{
 
 
       document.querySelector('#inbox').innerHTML+=`
 
-      <div id="${senderId}" class="conversation">
-      ${renderInboxInfo(text,createdAt,sender)}
+      <div id="${msg.senderId}" class="conversation">
+      ${renderInboxInfo(msg)}
   </div>
 
   </div>
@@ -488,7 +467,7 @@ const main = async()=>{
     // if logged in, load profile
     const {user} = await app.reAuthenticate();
 
-    let target =window.matchMedia('(max-width: 780px)');
+    let target =window.matchMedia('(max-width: 768px)');
 
 
 
@@ -497,7 +476,26 @@ const main = async()=>{
 
     target.addEventListener('change',async x=>await profilePage(user, x));
 
+    app.service('users').on('patched',async({id,isOnline,username,avatar})=>{
 
+      const parentDiv = document.getElementById(id);
+      if(parentDiv)
+      {
+        parentDiv.innerHTML=renderUserInfo(isOnline,username,avatar);
+      }
+
+
+    });
+
+    app.service('messages').on('created',async()=>{
+      const receiverId = document.getElementById('receiver').classList[0];
+      await Promise.all(
+        [
+          populateChat(receiverId),
+          renderInboxItems(),
+        ]
+      );
+    });
 
   }catch(error){
     console.log(error);
