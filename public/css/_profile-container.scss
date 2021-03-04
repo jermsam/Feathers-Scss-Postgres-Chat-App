@@ -5,6 +5,7 @@
   grid-template-columns: 2fr 4fr 1fr;
 
   @include tablet{
+
     grid-template-columns: 4fr 1fr;
  }
 
@@ -36,6 +37,7 @@
 
 #conversations{
   justify-content: space-between;
+  max-width: 100%;
   @include tablet{
     font-size:0.9rem;
 
@@ -72,7 +74,6 @@
     left:-0.25rem;
 
   }
-
 
 
 }
@@ -202,7 +203,8 @@ background: transparent;
 
 .conversation{
   position : relative;
-  min-width: 100%;
+
+  min-width: 3rem;
 border-radius: 1rem;
   color:$off;
   font-size: 0.8rem;
@@ -226,22 +228,24 @@ border-radius: 1rem;
   }
   &-date{
       font-size: 0.6rem;
+      min-width: 3rem;
   }
   display:grid;
-  grid-template-columns: 20px 2fr max-content;
+  grid-template-columns: 30px 2fr max-content;
   gap:10px;
   &-msg{
       @extend %overflow-style;
       grid-column: span 2;
       font-size: 0.7rem;
+
   }
   img{
     width:2rem;
     height:2rem;
     cursor: pointer;
     @include tablet{
-      width:1.8rem;
-      height:1.8rem;
+      width:1.5rem;
+      height:1.5rem;
       margin-top:0.3rem ;
       }
     object-fit: cover;
@@ -263,7 +267,7 @@ h5{
 }
 
 #chat{
-
+width:100%;
   background:linear-gradient(to right top, $light 10%, transparent 90%);
   border-radius:1rem;
 
