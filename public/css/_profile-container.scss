@@ -203,7 +203,7 @@ background: transparent;
 
 .conversation{
   position : relative;
-
+  max-width: 15rem;
   min-width: 3rem;
 border-radius: 1rem;
   color:$off;
@@ -335,7 +335,8 @@ display: none;
     margin-bottom: 0.5rem;
       display: grid;
       grid-template-columns: 80%;
-
+      max-width: 20rem;
+      min-width: 3rem;
       img{
           cursor: pointer;
           width: 2.5rem;

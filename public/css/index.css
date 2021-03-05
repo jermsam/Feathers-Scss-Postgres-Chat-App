@@ -248,6 +248,7 @@
 
 .conversation {
   position: relative;
+  max-width: 15rem;
   min-width: 3rem;
   border-radius: 1rem;
   color: #475347;
@@ -371,6 +372,8 @@ h5 {
   margin-bottom: 0.5rem;
   display: grid;
   grid-template-columns: 80%;
+  max-width: 20rem;
+  min-width: 3rem;
 }
 #chat .chat-message img {
   cursor: pointer;
