@@ -73,13 +73,12 @@
 
 .profile-container {
   height: 100%;
-  min-height: 320px;
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
   max-width: 80vw;
   background: linear-gradient(to right bottom, transparent 0%, white);
   border-radius: 1rem;
-  padding: 1rem;
+  padding: 0.7rem;
   z-index: 2;
   -webkit-backdrop-filter: blur(20rem);
           backdrop-filter: blur(20rem);
@@ -142,11 +141,10 @@
   overflow-y: scroll;
   min-height: 30%;
   width: 100%;
-  margin: 1rem;
+  margin: 0.7rem;
   padding: 0.7rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 .users-list__item {
@@ -158,14 +156,12 @@
   padding: 1rem;
   margin-bottom: 0.5rem;
   background: aliceblue;
-  display: flex;
-  flex-direction: column-reverse;
-  align-items: center;
-  align-content: center;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  place-items: center center;
 }
 @media screen and (max-width: 768px) {
   .users-list__item {
-    flex-direction: column-reverse;
     padding: 0.5rem;
   }
 }
@@ -177,7 +173,7 @@
 }
 .users-list__item .name {
   font-weight: bold;
-  margin-right: 1rem;
+  margin-right: 0.7rem;
 }
 
 .users-list__item > img {
@@ -244,8 +240,8 @@
 }
 
 .conversation-msg, .conversation .name, .users-list__item .name {
-  padding-left: 3px;
-  padding-right: 3px;
+  padding-left: 1px;
+  padding-right: 1px;
   white-space: nowrap;
   overflow-x: hidden;
   text-overflow: ellipsis;
@@ -257,15 +253,15 @@
   height: 100%;
   width: 100%;
   margin-top: 1.5rem;
-  padding: 1rem;
+  padding: 0.7rem;
   overflow-y: scroll;
 }
 
 .conversation {
   position: relative;
   width: 100%;
-  max-width: 8.5rem;
-  min-width: 3rem;
+  max-width: 9rem;
+  min-width: 4.5rem;
   border-radius: 1rem;
   color: #475347;
   font-size: 0.8rem;
@@ -342,22 +338,23 @@ h5 {
   border-radius: 1rem;
   display: flex;
   flex-direction: column-reverse;
-  padding: 1rem;
+  padding: 0.7rem;
   overflow-y: scroll;
 }
 #chat-inputs {
   background: aliceblue;
   height: 10%;
   border-radius: 1rem;
-  padding: 1rem;
+  padding: 0.7rem;
   display: grid;
-  grid-template-columns: 6fr 1fr;
+  grid-template-columns: 1fr;
   align-items: center;
   align-content: center;
   justify-items: center;
   justify-content: center;
 }
 #chat-inputs input {
+  min-width: 100%;
   color: #475347;
   background: white;
   outline: none;
@@ -376,17 +373,12 @@ h5 {
 #chat-inputs input::placeholder {
   color: #475347;
 }
-#chat-inputs img {
-  width: 2rem;
-  height: 2rem;
-  cursor: pointer;
-}
 #chat .chat-message {
   margin-bottom: 0.5rem;
   display: grid;
   grid-template-columns: 80%;
   max-width: 20rem;
-  min-width: 3rem;
+  min-width: 4.5rem;
 }
 #chat .chat-message img {
   cursor: pointer;
@@ -500,11 +492,9 @@ button, a {
 
 .secondary--btn {
   width: 100%;
+  min-width: -webkit-max-content;
+  min-width: -moz-max-content;
+  min-width: max-content;
   height: 3rem;
   padding: 1rem;
-}
-@media screen and (max-width: 768px) {
-  .secondary--btn {
-    padding: 0.2rem;
-  }
 }/*# sourceMappingURL=index.css.map */
