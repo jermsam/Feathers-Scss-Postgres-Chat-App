@@ -183,8 +183,7 @@ const profilePage= async(user,x)=> {
 
   </section>
 
-  <section id="mobile-inbox">
-  </section>
+
   <form style="padding:1rem;">
   <button class='secondary--btn' type='submit' id='logout'>Logout</button>
   </form>
