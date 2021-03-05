@@ -6,9 +6,9 @@
 
 This project uses [Feathers](http://feathersjs.com). An open source web framework for building modern real-time applications.
 I decided to style the UI with Sassy CSS (Scss - Syntactically Awesome Style Sheet) to appeal to the taste of any UI developer regardless of the Framework or UI technology they are using. 
-[Here is why I did not go Css](https://www.geeksforgeeks.org/what-is-the-difference-between-css-and-scss/)
-[Still wanted the css feel though, so I chose Scss and not Sass](https://www.geeksforgeeks.org/what-is-the-difference-between-scss-and-sass/)
-[Click here to check it out in production] (https://feathers-chat-app.herokuapp.com). 
+  [Here is why I did not go Css](https://www.geeksforgeeks.org/what-is-the-difference-between-css-and-scss/)
+  [Still wanted the css feel though, so I chose Scss and not Sass](https://www.geeksforgeeks.org/what-is-the-difference-between-scss-and-sass/)
+  [Click here to check it out in production](https://feathers-chat-app.herokuapp.com/). 
 
 ## WOuld you rather run it locally?
 
