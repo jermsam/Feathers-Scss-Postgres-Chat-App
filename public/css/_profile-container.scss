@@ -38,6 +38,7 @@
 #conversations{
   justify-content: space-between;
   max-width: max-content;
+  max-height: 90vh;
   @include tablet{
     font-size:0.9rem;
 

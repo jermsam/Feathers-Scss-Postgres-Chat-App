@@ -110,6 +110,7 @@
   max-width: -webkit-max-content;
   max-width: -moz-max-content;
   max-width: max-content;
+  max-height: 90vh;
 }
 @media screen and (max-width: 768px) {
   #conversations {
