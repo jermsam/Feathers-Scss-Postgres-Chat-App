@@ -91,10 +91,8 @@ button,a{
 
 .secondary--btn{
   width: 100%;
+  min-width:max-content;
   height: 3rem;
-  @include tablet{
-    padding: 0.2rem;
 
-    }
   padding: 1rem;
 }

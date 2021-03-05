@@ -147,7 +147,7 @@ const profilePage= async(user,x)=> {
 
   <section id="chat-inputs">
     <input type="text" name="text-box"  placeholder="Send text" />
-    <div><img src="https://i.imgur.com/v7oUwbD.png" alt="add attachment"></div>
+
   </section>
   </div>
   <div id='conversations'>
