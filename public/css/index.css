@@ -151,7 +151,6 @@
 #users-list {
   overflow-y: scroll;
   max-height: 40rem;
-  min-height: 35%;
   width: 100%;
   margin: 0.7rem;
   padding: 0.7rem;

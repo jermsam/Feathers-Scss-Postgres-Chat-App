@@ -19,8 +19,6 @@ module.exports = function (app) {
         rejectUnauthorized: false, // disabling its ability to reject Unauthorised connections
       }
 
-
-
     }
 
   });

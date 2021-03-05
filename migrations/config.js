@@ -18,8 +18,6 @@ module.exports = {
         rejectUnauthorized: false, // disabling its ability to reject Unauthorised connections
       }
 
-
-
     }
 
   }
