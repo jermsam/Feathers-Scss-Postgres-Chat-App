@@ -112,9 +112,10 @@ const homePage =`<div class='home'>
 </div>
 `;
 
-const profilePage= async(user,x)=> {
-
-  mainContainer.innerHTML=`
+const profilePage=(user,x)=>
+{
+  mainContainer.innerHTML=
+  `
   <div class="profile">
 
 
@@ -178,9 +179,9 @@ const profilePage= async(user,x)=> {
   </section>
   `:''}
 
-
-  <section id="users-list">
   <h5>USERS</h5>
+  <section id="users-list">
+
 
   </section>
 
@@ -194,79 +195,8 @@ const profilePage= async(user,x)=> {
 
   </div>
   `;
-
-
-
-
-  const logoutBtn = document.querySelectorAll('#logout')[0];
-
-  logoutBtn.addEventListener('click',async()=>{
-    await app.logout();
-    location.reload();
-  });
-
-  const userId = document.querySelector('#user-profile').classList[0];
-
-
-
-  const {data}= await app.service('users').find({
-    query:{
-      id:{
-        $ne:userId
-      }
-    }
-  });
-
-
-
-  await renderInboxItems();
-
-
-
-  data.forEach(({id,avatar,username,isOnline})=>{
-  // check has conversation
-    const hasConversation = getHasConversation(id);
-    if(!hasConversation){
-      document.querySelector('#users-list').innerHTML+=`
-<div id="${id}" class='users-list__item'>
-${renderUserInfo(isOnline,username,avatar)}
-</div>
-`;
-    }
-
-  });
-
-
-
-
-
-  document.querySelector('#inbox').childNodes.forEach(selectUserListItem);
-  document.querySelector('#users-list').childNodes.forEach(selectUserListItem);
-  document.querySelector('#groups').childNodes.forEach(selectUserListItem);
-
-
-
-
-  await populateChat(null);
-
-  console.log( document.querySelector('#chat-list'));
-
-  document.querySelector('input[name=text-box]')
-    .addEventListener('keyup',async({key,target})=>{
-
-      if(key=='Enter'&&target.value){
-        const receiverId=document.querySelector('#receiver').classList[0]||null;
-
-        const text = target.value;
-        await app.service('messages').create({text,receiverId});
-        target.value='';
-      }
-
-
-    });
-
-
 };
+
 
 
 
@@ -327,9 +257,9 @@ const populateChat = async(receiverId)=>{
 
 
 const renderUserInfo = (isOnline,username,avatar)=>`
-<div class="name">${username}</div>
-      <img src="${avatar}" alt="${username}"/>
 
+      <img src="${avatar}" alt="${username}"/>
+      <div class="name">${username}</div>
       <div class="indicator" style="--background:${isOnline?'rgb(9, 204, 9)':'rgb(71, 83, 71)'};" />
 
 `;
@@ -466,36 +396,89 @@ const main = async()=>{
   try{
     // if logged in, load profile
     const {user} = await app.reAuthenticate();
-
+    // but examine screen size
     let target =window.matchMedia('(max-width: 768px)');
+    // then render appropriate dashboard layout
+    profilePage(user,target);
+    // listen to changes in
+    target.addEventListener('change',x=>profilePage(user, x));
 
-
-
-    await profilePage(user,target);
-
-
-    target.addEventListener('change',async x=>await profilePage(user, x));
-
-    app.service('users').on('patched',async({id,isOnline,username,avatar})=>{
-
-      const parentDiv = document.getElementById(id);
-      if(parentDiv)
-      {
-        parentDiv.innerHTML=renderUserInfo(isOnline,username,avatar);
-      }
-
-
+    // logout when logout button is clicked
+    document.querySelector('#logout').addEventListener('click',async()=>{
+      await app.logout();
+      location.reload();
     });
 
+    /** populate chat  and add to inbox messages */
+    await Promise.all(
+      [
+        renderInboxItems(),
+        populateChat(null),
+
+      ]
+    );
+
+    /** add all users in the user list */
+    // 1. get the authenticated user id (you could also use user.id here);
+    const userId = document.querySelector('#user-profile').classList[0];
+    // 2. fetch all the other chat members
+    const {data}= await app.service('users').find({
+      query:{
+        id:{
+          $ne:userId
+        }
+      }
+    });
+    // 3. render each to the list
+    data.forEach(({id,avatar,username,isOnline})=>{
+      // check has conversation
+      const hasConversation = getHasConversation(id);
+      if(!hasConversation){
+        document.querySelector('#users-list').innerHTML+=`
+      <div id="${id}" class='users-list__item'>
+      ${renderUserInfo(isOnline,username,avatar)}
+      </div>
+      `;
+      }
+    });
+    // 4. Make these selectable
+    document.querySelector('#users-list').childNodes.forEach(selectUserListItem);
+    document.querySelector('#inbox').childNodes.forEach(selectUserListItem);
+    document.querySelector('#users-list').childNodes.forEach(selectUserListItem);
+    document.querySelector('#groups').childNodes.forEach(selectUserListItem);
+
+    // Now listen to changes in message input  and submit on enter
+
+    document.querySelector('input[name=text-box]')
+      .addEventListener('keyup',async({key,target})=>{
+
+        if(key=='Enter'&&target.value){
+          const receiverId=document.querySelector('#receiver').classList[0]||null;
+
+          const text = target.value;
+          await app.service('messages').create({text,receiverId});
+          target.value='';
+        }
+
+
+      });
+
+    // listen for new message
     app.service('messages').on('created',async()=>{
-      const receiverId = document.getElementById('receiver').classList[0];
+      const receiverId = document.getElementById('receiver').classList[0]||null;
       await Promise.all(
         [
-          populateChat(receiverId),
           renderInboxItems(),
+          populateChat(receiverId),
+
         ]
       );
     });
+
+
+
+
+
 
   }catch(error){
     console.log(error);
