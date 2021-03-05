@@ -1,12 +1,12 @@
 .profile-container{
   height: 100%;
-  min-height:80vh;
+  min-height:320px;
   display:grid;
-  grid-template-columns: 2fr 4fr 1fr;
-
+  grid-template-columns: 1fr 2fr 1fr;
+  max-width:80vw;
   @include tablet{
-
-    grid-template-columns: 4fr 1fr;
+    max-width:100%;
+    grid-template-columns:2fr 1fr;
  }
 
   background:linear-gradient(to right bottom, transparent 0%,rgba(255,255,255,1));
@@ -25,7 +25,6 @@
   flex-direction: column;
   align-items: center;
 
-
 }
 
 #menu{
@@ -36,12 +35,13 @@
 }
 
 #conversations{
+
   justify-content: space-between;
-  max-width: max-content;
+  max-width: 100%;
   max-height: 90vh;
   @include tablet{
     font-size:0.9rem;
-
+    max-width: 100%;
    }
 }
 
@@ -75,14 +75,17 @@
   width: 100%;
   margin: 1rem;
   padding: 0.7rem;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .users-list__item{
   @include tablet{
-    flex-direction:row;
+    flex-direction:column-reverse;
     padding: 0.5rem;
  }
- max-width: max-content;
+
   position : relative;
   border-radius: 1rem;
     color:$off;
@@ -187,13 +190,9 @@ align-content: center;
 
 #inbox{
   border-radius: 1rem;
-background: transparent;
+  background-color: transparent;
 
-  height: 80%;
-  max-height: 29rem;
-  @include tablet{
-    max-height: 40%;
-    }
+  height: 100%;
 
   width: 100%;
   margin-top:1.5rem;
@@ -206,7 +205,8 @@ background: transparent;
 
 .conversation{
   position : relative;
-  max-width: 15rem;
+  width:100%;
+ max-width:8.5rem;
   min-width: 3rem;
 border-radius: 1rem;
   color:$off;
@@ -271,7 +271,8 @@ h5{
 
 #chat{
 width:100%;
-  background:linear-gradient(to right top, $light 10%, transparent 90%);
+
+background:linear-gradient(to right top, $light 10%, transparent 90%);
   border-radius:1rem;
   height:100%;
 max-height: 90vh;
@@ -285,14 +286,15 @@ display: none;
   }
 
   &-list{
-    width: 100%;
 
+    width: 100%;
+    background-color: red;
     height: 100%;
-    background: transparent;
+    // background: transparent;
     border-radius:1rem;
     display: flex;
            flex-direction: column-reverse;
-            padding: 0 1rem;
+            padding:1rem;
         overflow-y: scroll;
   }
 
