@@ -337,8 +337,8 @@ h5 {
 }
 #chat-list {
   width: 100%;
-  background-color: red;
   height: 100%;
+  background: transparent;
   border-radius: 1rem;
   display: flex;
   flex-direction: column-reverse;
