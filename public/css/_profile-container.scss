@@ -14,7 +14,7 @@
   display:grid;
   grid-template-columns: 1fr 2fr 1fr;
 
-  max-width:max-content;
+  max-width:60vw;
   @include tablet{
     min-width:96vw;
     min-height:96vh;
