@@ -84,9 +84,7 @@
   min-height: 90vh;
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
-  max-width: -webkit-max-content;
-  max-width: -moz-max-content;
-  max-width: max-content;
+  max-width: 60vw;
   background: linear-gradient(to right bottom, transparent 0%, white);
   border-radius: 1rem;
   padding: 0.7rem;
