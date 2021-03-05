@@ -125,10 +125,10 @@ const profilePage= async(user,x)=> {
   <div id='menu'>
 
 
-
+  <h5>INBOX</h5>
   <!-- inbox -->
   <section id="inbox">
-  <h5>INBOX</h5>
+
 
   </section>
   </div>
@@ -159,9 +159,9 @@ const profilePage= async(user,x)=> {
   </section>
   <!-- groups -->
 
-
-  <section id="groups">
   <h5>GROUPS</h5>
+  <section id="groups">
+
     <div id="" class='is-active'>
   <image src="https://image.flaticon.com/icons/png/512/32/32441.png" alt='public'/>
       <h4>
@@ -171,8 +171,9 @@ const profilePage= async(user,x)=> {
   </section>
 
   ${x.matches?`
-  <section id="inbox">
   <h5>INBOX</h5>
+  <section id="inbox">
+
 
   </section>
   `:''}
@@ -326,7 +327,7 @@ const populateChat = async(receiverId)=>{
 
 
 const renderUserInfo = (isOnline,username,avatar)=>`
-      <div class="name">${username}</div>
+<div class="name">${username}</div>
       <img src="${avatar}" alt="${username}"/>
 
       <div class="indicator" style="--background:${isOnline?'rgb(9, 204, 9)':'rgb(71, 83, 71)'};" />

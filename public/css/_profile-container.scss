@@ -1,11 +1,23 @@
-.profile-container{
-  height: 100%;
+%overflow-style{
+  padding-left: 1px;
+  padding-right: 1px;
+      white-space: nowrap;
+      overflow-x: hidden;
+      text-overflow: ellipsis;
+}
 
+
+.profile-container{
+
+  height: 100%;
+  min-height: 90vh;
   display:grid;
   grid-template-columns: 1fr 2fr 1fr;
+  min-width:80vw;
   max-width:80vw;
   @include tablet{
-    max-width:100%;
+    min-width:96vw;
+    min-height:96vh;
     grid-template-columns:2fr 1fr;
  }
 
@@ -24,10 +36,11 @@
   display:flex;
   flex-direction: column;
   align-items: center;
-
+  max-height: 100%;
 }
 
 #menu{
+
   justify-content: start;
   @include tablet{
     display:none;
@@ -71,7 +84,10 @@
 
 #users-list{
   overflow-y: scroll;
-  min-height: 30%;
+  @include tablet{
+    min-height: 40%;
+ }
+ min-height: 30%;
   width: 100%;
   margin: 0.7rem;
   padding: 0.7rem;
@@ -81,15 +97,12 @@
 }
 
 .users-list__item{
-  @include tablet{
 
-    padding: 0.5rem;
- }
 
   position : relative;
   border-radius: 1rem;
     color:$off;
-    font-size: 0.8rem;
+    font-size: 1rem;
     border-bottom: 1px solid darken($off,20%);
     padding: 1rem;
     margin-bottom:0.5rem;
@@ -103,15 +116,15 @@
     }
 
     .name{
-      font-weight: bold;
+      color:$primary;
       @extend %overflow-style;
-      margin-right:0.7rem;
+      font-size: 0.7rem;
   }
     display:grid;
     grid-template-columns:2fr 1fr;
 
 
-    place-items : center center;
+
 
 
 
@@ -179,13 +192,6 @@
  }
 }
 
-%overflow-style{
-  padding-left: 1px;
-  padding-right: 1px;
-      white-space: nowrap;
-      overflow-x: hidden;
-      text-overflow: ellipsis;
-}
 
 
 #inbox{
