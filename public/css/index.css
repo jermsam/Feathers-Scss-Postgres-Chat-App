@@ -107,7 +107,9 @@
 
 #conversations {
   justify-content: space-between;
-  max-width: 100%;
+  max-width: -webkit-max-content;
+  max-width: -moz-max-content;
+  max-width: max-content;
 }
 @media screen and (max-width: 768px) {
   #conversations {
@@ -134,7 +136,18 @@
   }
 }
 
+#users-list {
+  overflow-y: scroll;
+  min-height: 30%;
+  width: 100%;
+  margin: 1rem;
+  padding: 0.7rem;
+}
+
 .users-list__item {
+  max-width: -webkit-max-content;
+  max-width: -moz-max-content;
+  max-width: max-content;
   position: relative;
   border-radius: 1rem;
   color: #475347;
@@ -162,7 +175,7 @@
 }
 .users-list__item .name {
   font-weight: bold;
-  margin: 0 0.3rem;
+  margin-right: 1rem;
 }
 
 .users-list__item > img {
@@ -229,7 +242,8 @@
 }
 
 .conversation-msg, .conversation .name, .users-list__item .name {
-  padding-left: 5px;
+  padding-left: 3px;
+  padding-right: 3px;
   white-space: nowrap;
   overflow-x: hidden;
   text-overflow: ellipsis;
@@ -244,6 +258,11 @@
   margin-top: 1.5rem;
   padding: 1rem;
   overflow-y: scroll;
+}
+@media screen and (max-width: 768px) {
+  #inbox {
+    max-height: 40%;
+  }
 }
 
 .conversation {
@@ -306,14 +325,12 @@ h5 {
   margin-bottom: 1rem;
 }
 
-::-webkit-scrollbar {
-  display: none;
-}
-
 #chat {
   width: 100%;
   background: linear-gradient(to right top, aliceblue 10%, transparent 90%);
   border-radius: 1rem;
+  height: 100%;
+  max-height: 90vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -324,7 +341,6 @@ h5 {
 #chat-list {
   width: 100%;
   height: 100%;
-  max-height: 65vh;
   background: transparent;
   border-radius: 1rem;
   display: flex;
