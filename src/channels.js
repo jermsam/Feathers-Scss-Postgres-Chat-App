@@ -16,6 +16,8 @@ module.exports = function(app) {
       // Obtain the logged in user from the connection
       // const user = connection.user;
 
+
+
       // The connection is no longer anonymous, remove it
       app.channel('anonymous').leave(connection);
 
@@ -79,25 +81,24 @@ module.exports = function(app) {
   // authenticated users should be notified when a user is patched
   app.service('users').publish('patched', () => app.channel('authenticated'));
 
-  app.service('messages').publish('created', ({receiverId}, {params:{user}}) => {
 
-    // we want to publish created events of
+  app.service('messages').publish('created', ({receiverId}, {params:{user:{id}}})=> {
 
-
+    // if receiver is specified
     if(receiverId){
-      // recipients only to the specified recipients or the sender
+      // message events are only sent to the sender and/or receiver
 
-      return [
-        app.channel(app.channels).filter(connection =>
-          ( connection.user.id == receiverId) ||  ( connection.user.id == user.id)
-        )
-      ];
+
+      return app.channel(app.channels).filter(connection =>
+        (connection.user.id == receiverId || connection.user.id == id)
+      );
+
 
     }else{
-    // public messages (ie: receiverId='') to all authenticated users
+      //else they are sent to all logged in users;
       return app.channel('authenticated');
     }
 
-
   });
+
 };
