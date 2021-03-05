@@ -71,10 +71,20 @@
   color: #d30f40;
 }
 
+.conversation-msg, .conversation .name, .users-list__item .name {
+  padding-left: 1px;
+  padding-right: 1px;
+  white-space: nowrap;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+}
+
 .profile-container {
   height: 100%;
+  min-height: 90vh;
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
+  min-width: 80vw;
   max-width: 80vw;
   background: linear-gradient(to right bottom, transparent 0%, white);
   border-radius: 1rem;
@@ -86,7 +96,8 @@
 }
 @media screen and (max-width: 768px) {
   .profile-container {
-    max-width: 100%;
+    min-width: 96vw;
+    min-height: 96vh;
     grid-template-columns: 2fr 1fr;
   }
 }
@@ -95,6 +106,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  max-height: 100%;
 }
 
 #menu {
@@ -146,24 +158,23 @@
   display: flex;
   flex-direction: column;
 }
+@media screen and (max-width: 768px) {
+  #users-list {
+    min-height: 40%;
+  }
+}
 
 .users-list__item {
   position: relative;
   border-radius: 1rem;
   color: #475347;
-  font-size: 0.8rem;
+  font-size: 1rem;
   border-bottom: 1px solid #181c18;
   padding: 1rem;
   margin-bottom: 0.5rem;
   background: aliceblue;
   display: grid;
   grid-template-columns: 2fr 1fr;
-  place-items: center center;
-}
-@media screen and (max-width: 768px) {
-  .users-list__item {
-    padding: 0.5rem;
-  }
 }
 .users-list__item:hover, .users-list__item.active {
   background: linear-gradient(to left top, #8b85ff 10%, #fff 80%);
@@ -172,8 +183,8 @@
   cursor: pointer;
 }
 .users-list__item .name {
-  font-weight: bold;
-  margin-right: 0.7rem;
+  color: #8b85ff;
+  font-size: 0.7rem;
 }
 
 .users-list__item > img {
@@ -237,14 +248,6 @@
   #user-profile {
     display: none;
   }
-}
-
-.conversation-msg, .conversation .name, .users-list__item .name {
-  padding-left: 1px;
-  padding-right: 1px;
-  white-space: nowrap;
-  overflow-x: hidden;
-  text-overflow: ellipsis;
 }
 
 #inbox {
