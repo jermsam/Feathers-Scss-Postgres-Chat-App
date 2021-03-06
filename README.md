@@ -1,6 +1,10 @@
 # Feathers-Scss-Postgres-Chat-App
 
-> A chat app styled with Scss and Served with a Restful and Websocket API built  using feathersjs and sequelize with postgresql
+> A chat app styled with Scss and Served with a Restful and Websocket API built  using feathersjs and sequelize with postgresql.
+> In this particular example, I showcase how to:
+ - send message events only to the target recipient and sender.
+ - disable ssl verification for [Heroku Postgres](https://devcenter.heroku.com/changelog-items/852)
+ - styling with [Sassy Css (Scss - Syntactically Awesome Style Sheet)](https://sass-lang.com/guide)
 
 ## About
 
@@ -10,7 +14,7 @@ I decided to style the UI with Sassy CSS (Scss - Syntactically Awesome Style She
   - [Still wanted the css feel though, so I chose Scss and not Sass](https://www.geeksforgeeks.org/what-is-the-difference-between-scss-and-sass/)
   - [Click here to check it out in production](https://feathers-chat-app.herokuapp.com/). 
 
-## WOuld you rather run it locally?
+## W0uld you rather run it locally?
 
 Getting up and running is as easy as 1, 2, 3,4.
 
