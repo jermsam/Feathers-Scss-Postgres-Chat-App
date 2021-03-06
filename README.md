@@ -1,6 +1,6 @@
-# chat-app-postgres
+# Feathers-Scss-Postgres-Chat-App
 
-> A chat app styled with Scss and Served with a Restful and Websocket API built  using feathersjs
+> A chat app styled with Scss and Served with a Restful and Websocket API built  using feathersjs and sequelize with postgresql
 
 ## About
 
