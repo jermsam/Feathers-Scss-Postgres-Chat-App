@@ -15,9 +15,9 @@ I decided to style the UI with Sassy CSS (Scss - Syntactically Awesome Style She
 Getting up and running is as easy as 1, 2, 3,4.
 
 1. Make sure you have  installed:
-  [NodeJS](https://nodejs.org/),
-  [postgres](https://www.postgresql.org/docs/9.3/installation.html)
-  [yarn](https://yarnpkg.com/).
+  - [NodeJS](https://nodejs.org/),
+  - [postgres](https://www.postgresql.org/docs/9.3/installation.html)
+  - [yarn](https://yarnpkg.com/).
 2. Install your dependencies
 
     ```
