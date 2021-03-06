@@ -2,7 +2,7 @@
 
 > A chat app styled with Scss and Served with a Restful and Websocket API built  using feathersjs and sequelize with postgresql.
 > In this particular example, I showcase how to:
- - send message events only to the target recipient and sender.
+ - send private message events only to the target recipient and sender and public ones only to authenticated users.
  - disable ssl verification for [Heroku Postgres](https://devcenter.heroku.com/changelog-items/852)
  - styling with [Sassy Css (Scss - Syntactically Awesome Style Sheet)](https://sass-lang.com/guide)
 
