@@ -9,7 +9,7 @@
   "authentication": {
     "entity": "user",
     "service": "users",
-    "secret": "WPd40MbxVG9L0TM8qkcoJyQGzic=",
+    "secret": "u5KKTc3qTzY2Bx2DnZBKybM0H80=",
     "authStrategies": [
       "jwt",
       "local"
@@ -26,6 +26,18 @@
     "local": {
       "usernameField": "email",
       "passwordField": "password"
+    },
+    "oauth": {
+      "redirect": "/",
+      "google": {
+        "key": "GOOGLE_OAUTH2_CLIENT_ID",
+        "secret": "GOOGLE_OAUTH2_SECRET_KEY",
+        "scope": [
+          "email",
+          "profile",
+          "openid"
+        ]
+      }
     }
   },
   "postgres": "POSTGRES"
