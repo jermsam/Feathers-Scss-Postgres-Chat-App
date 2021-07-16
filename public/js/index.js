@@ -80,7 +80,6 @@ const mainContainer = document.querySelector('.container');
 const homePage =`<div class='home'>
 
 <h2> Join Chat</h2>
-<button class='secondary--btn' href="https://feathers-chat-app.herokuapp.com/auth/google">Sign in with google</button>
 <form class='form'>
 <div class="form-control">
   <input type="email" name="email" placeholder="Email"/>
