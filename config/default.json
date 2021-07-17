@@ -27,18 +27,7 @@
       "usernameField": "email",
       "passwordField": "password"
     },
-    "oauth": {
-      "redirect": "/",
-      "google": {
-        "key": "GOOGLE_OAUTH2_CLIENT_ID",
-        "secret": "GOOGLE_OAUTH2_SECRET_KEY",
-        "scope": [
-          "email",
-          "profile",
-          "openid"
-        ]
-      }
-    }
+    
   },
   "postgres": "POSTGRES"
 }
