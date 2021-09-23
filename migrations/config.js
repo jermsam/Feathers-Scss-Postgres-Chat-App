@@ -1,5 +1,6 @@
 const app = require('../src/app');
 const env = process.env.NODE_ENV || 'development';
+console.log(env);
 const dialect = 'postgres'; // Or your dialect name
 const url =app.get(dialect);
 console.log(url);
@@ -11,7 +12,6 @@ module.exports = {
     migrationStorageTableName: '_migrations',
 
     dialectOptions: {
-
 
       ssl:{
         sslStrict: false, // turning off sslStrict mode

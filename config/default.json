@@ -26,7 +26,7 @@
     "local": {
       "usernameField": "email",
       "passwordField": "password"
-    },
+    }
     
   },
   "postgres": "POSTGRES"

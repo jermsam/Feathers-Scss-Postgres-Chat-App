@@ -6,9 +6,12 @@ const cors = require('cors');
 const logger = require('./logger');
 
 const feathers = require('@feathersjs/feathers');
+
 const configuration = require('@feathersjs/configuration');
+console.log('papa');
 const express = require('@feathersjs/express');
 const socketio = require('@feathersjs/socketio');
+
 
 
 const middleware = require('./middleware');
@@ -20,10 +23,15 @@ const authentication = require('./authentication');
 
 const sequelize = require('./sequelize');
 
+
+
 const app = express(feathers());
+
 require('dotenv').config();
+
 // Load app configuration
 app.configure(configuration());
+console.log('papa');
 // Enable security, CORS, compression, favicon and body parsing
 app.use(helmet({
   contentSecurityPolicy: false
