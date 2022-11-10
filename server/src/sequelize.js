@@ -1,4 +1,4 @@
-const Sequelize = require('sequelize');
+const Sequelize = require('server/src/sequelize');
 
 module.exports = function (app) {
   const connectionString = app.get('postgres');
@@ -14,10 +14,10 @@ module.exports = function (app) {
     dialectOptions: {
 
 
-      ssl:{
-        sslStrict: false, // turning off sslStrict mode
-        rejectUnauthorized: false, // disabling its ability to reject Unauthorised connections
-      }
+      // ssl:{
+      //   sslStrict: false, // turning off sslStrict mode
+      //   rejectUnauthorized: false, // disabling its ability to reject Unauthorised connections
+      // }
 
     }
 
