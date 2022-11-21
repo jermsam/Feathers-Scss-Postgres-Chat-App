@@ -24,13 +24,13 @@
     "yarn": ">= 0.18.0"
   },
   "scripts": {
-    "test": "yarn run lint && yarn run jest",
-    "lint": "eslint src/. test/. --config .eslintrc.json --fix",
-    "run-migration": "sequelize db:migrate",
-    "undo-migration": "sequelize db:migrate:undo",
-    "dev": "yarn run-migration && nodemon src/",
-    "start": "yarn run-migration && nodemon src/",
-    "jest": "jest  --forceExit"
+    "test": "yarn run lint && yarn run ../node_modules/.bin/jest",
+    "lint": "../node_modules/.bin/eslint src/. test/. --config .eslintrc.json --fix",
+    "run-migration": "../node_modules/.bin/sequelize db:migrate",
+    "undo-migration": "../node_modules/.bin/sequelize db:migrate:undo",
+    "dev": "yarn run-migration && ../node_modules/.bin/nodemon src/",
+    "start": "yarn run-migration && ../node_modules/.bin/nodemon src/",
+    "jest": "../node_modules/.bin/jest  --forceExit"
   },
   "standard": {
     "env": [
@@ -59,7 +59,6 @@
     "pg-hstore": "^2.3.3",
     "randomcolor": "^0.6.2",
     "sequelize": "^6.5.0",
-    "sequelize-cli": "^6.2.0",
     "serve-favicon": "^2.5.0",
     "validator": "^13.5.2",
     "winston": "^3.0.0"
@@ -67,6 +66,7 @@
   "devDependencies": {
     "axios": "^0.21.1",
     "eslint": "^7.17.0",
-    "jest": "^26.6.3"
+    "jest": "^26.6.3",
+    "sequelize-cli": "^6.5.2"
   }
 }
