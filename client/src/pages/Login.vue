@@ -1,6 +1,8 @@
 <template>
   <q-input outlined v-model="text" label="Outlined" />
   <q-input outlined v-model="text" label="Outlined" />
+  <q-input outlined v-model="text" label="Outlined" />
+
 </template>
 
 <script>
