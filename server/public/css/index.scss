@@ -1,0 +1,98 @@
+
+@import 'colors';
+@import 'media-queries';
+@import 'form';
+
+@import 'profile-container';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  font-family: 'Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif';
+  font-weight: 400;
+  font-size: 16px;
+  color: $off;
+}
+
+
+
+footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
+}
+
+a {
+  color: $link;
+  text-decoration: none;
+  &:hover ,&:focus{
+    color: $link;
+  }
+}
+
+button,a{
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+%active{
+  background-color:$primary;
+  color:$light;
+}
+
+.is-active{
+  @extend %active;
+}
+
+
+
+
+
+
+
+
+// home page
+
+.home, .profile{
+  display:flex;
+  flex-direction:column;
+  align-items: center;
+  justify-content: center;
+
+  min-height:100vh;
+  background: linear-gradient(to top right, $primary 0%,$light 70%);
+    h2{
+      text-align: center;
+      font-size:4rem;
+      font-weight: bold;
+      margin: 1rem;
+    }
+}
+
+
+.profile{
+
+
+  background-color: $primary;
+
+
+}
+
+.secondary--btn{
+  width: 100%;
+  min-width:max-content;
+  height: 3rem;
+
+  padding: 1rem;
+}

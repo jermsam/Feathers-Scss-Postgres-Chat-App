@@ -1,0 +1,72 @@
+{
+  "name": "chat-app-postgres",
+  "description": "A chat app styled with Scss and Served with a Restful and Websocket API built  using feathersjs",
+  "version": "0.0.0",
+  "homepage": "",
+  "private": true,
+  "main": "src",
+  "keywords": [
+    "feathers"
+  ],
+  "author": {
+    "name": "Samson SSali",
+    "email": "jitpomi@gmail.com"
+  },
+  "contributors": [],
+  "bugs": {},
+  "directories": {
+    "lib": "src",
+    "test": "test/",
+    "config": "config/"
+  },
+  "engines": {
+    "node": ">=14.0.0",
+    "yarn": ">= 0.18.0"
+  },
+  "scripts": {
+    "test": "yarn run lint && yarn run jest",
+    "lint": "eslint src test/. --config .eslintrc.json --fix",
+    "run-migration": "sequelize db:migrate",
+    "undo-migration": "sequelize db:migrate:undo",
+    "dev": "yarn run-migration && nodemon src",
+    "start": "yarn run-migration && nodemon src",
+    "jest": "jest  --forceExit"
+  },
+  "standard": {
+    "env": [
+      "jest"
+    ],
+    "ignore": []
+  },
+  "dependencies": {
+    "@feathersjs/authentication": "^4.5.11",
+    "@feathersjs/authentication-local": "^4.5.11",
+    "@feathersjs/authentication-oauth": "^4.5.11",
+    "@feathersjs/configuration": "^4.5.11",
+    "@feathersjs/errors": "^4.5.11",
+    "@feathersjs/express": "^4.5.11",
+    "@feathersjs/feathers": "^4.5.11",
+    "@feathersjs/socketio": "^4.5.11",
+    "@feathersjs/transport-commons": "^4.5.11",
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "feathers-sequelize": "^6.2.0",
+    "helmet": "^4.3.1",
+    "lodash.isempty": "^4.4.0",
+    "nodemon": "^2.0.7",
+    "pg": "^8.5.1",
+    "pg-hstore": "^2.3.3",
+    "randomcolor": "^0.6.2",
+    "sequelize": "^6.5.0",
+    "sequelize-cli": "^6.2.0",
+    "serve-favicon": "^2.5.0",
+    "validator": "^13.5.2",
+    "winston": "^3.0.0"
+  },
+  "devDependencies": {
+    "axios": "^0.21.1",
+    "eslint": "^7.17.0",
+    "jest": "^26.6.3"
+  }
+}
