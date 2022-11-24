@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "homepage": "",
   "private": true,
-  "main": "server/src",
+  "main": "src",
   "keywords": [
     "feathers"
   ],
@@ -15,9 +15,9 @@
   "contributors": [],
   "bugs": {},
   "directories": {
-    "lib": "server/src",
-    "test": "server/test/",
-    "config": "server/config/"
+    "lib": "src",
+    "test": "test/",
+    "config": "config/"
   },
   "engines": {
     "node": ">=14.0.0",
@@ -25,11 +25,11 @@
   },
   "scripts": {
     "test": "yarn run lint && yarn run jest",
-    "lint": "eslint server/src/. server/test/. --config .eslintrc.json --fix",
+    "lint": "eslint src/. test/. --config .eslintrc.json --fix",
     "run-migration": "sequelize db:migrate",
     "undo-migration": "sequelize db:migrate:undo",
-    "dev": "yarn run-migration && nodemon server/src/",
-    "start": "yarn run-migration && nodemon server/src/",
+    "dev": "yarn run-migration && nodemon src/",
+    "start": "yarn run-migration && nodemon src/",
     "jest": "jest  --forceExit"
   },
   "standard": {
