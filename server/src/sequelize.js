@@ -1,4 +1,4 @@
-const Sequelize = require('sequelize');
+const Sequelize = require('server/src/sequelize');
 
 module.exports = function (app) {
   const connectionString = app.get('postgres');
