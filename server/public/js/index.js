@@ -446,7 +446,7 @@ const main = async()=>{
     document.querySelector('#users-list').childNodes.forEach(selectUserListItem);
     document.querySelector('#groups').childNodes.forEach(selectUserListItem);
 
-    // Now listen to changes in message input  and submit on enter
+    // Now listen to changes in message-input  and submit on enter
 
     document.querySelector('input[name=text-box]')
       .addEventListener('keyup',async({key,target})=>{

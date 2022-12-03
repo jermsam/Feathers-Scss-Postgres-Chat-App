@@ -1,6 +1,6 @@
-# HerokuChatApp (client)
+# Heroku Chat App (heroku-chat-app)
 
-a chat app
+a reliable chat app
 
 ## Install the dependencies
 ```bash
