@@ -1,11 +1,33 @@
 <template>
   <q-page class="row items-center justify-evenly">
+    <div>
     <example-component
       title="Example component"
       active
       :todos="todos"
       :meta="meta"
     ></example-component>
+
+      <div class="column q-gutter-md">
+
+        <div class="column q-gutter-sm">
+          <h3>Atoms</h3>
+          <primary-button/>
+        </div>
+
+        <div class="column q-gutter-sm">
+          <h3>Molecules</h3>
+
+        </div>
+        <div class="column q-gutter-sm">
+          <h3>Organisms</h3>
+
+        </div>
+
+      </div>
+    </div>
+
+
   </q-page>
 </template>
 
@@ -13,6 +35,7 @@
 import { Todo, Meta } from 'components/models';
 import ExampleComponent from 'components/ExampleComponent.vue';
 import { ref } from 'vue';
+import PrimaryButton from "components/atoms/buttons/PrimaryButton.vue";
 
 const todos = ref<Todo[]>([
   {
