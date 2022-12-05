@@ -13,69 +13,8 @@
         <div class="column q-gutter-sm">
           <h3>Atoms</h3>
           <primary-button/>
-          <h5>Icons</h5>
-          <div>
-            <call-icon>
-              <q-icon name="fa-solid fa-right-from-bracket"/>
-            </call-icon>
-          </div>
-
-          <div>
-            <call-icon>
-              <q-icon name="fa-solid fa-magnifying-glass"/>
-            </call-icon>
-          </div>
-
-          <div>
-            <call-icon>
-              <q-icon name="fa-solid fa-plus"/>
-            </call-icon>
-          </div>
-
-          <div>
-            <call-icon>
-              <q-icon name="fa-solid fa-microphone"/>
-            </call-icon>
-          </div>
-
-          <div>
-            <call-icon>
-              <q-icon name="mdi-send"/>
-            </call-icon>
-          </div>
-
-          <div>
-            <call-icon>
-              <q-icon name="fa-solid fa-user-plus"/>
-            </call-icon>
-          </div>
-
-          <div>
-            <call-icon>
-              <q-icon name="mdi-account-multiple-plus"/>
-            </call-icon>
-          </div>
-          <div>
-            <call-icon>
-              <q-icon name="fa-solid fa-video"/>
-            </call-icon>
-          </div>
-          <div>
-            <call-icon>
-              <q-icon name="fa-solid fa-phone"/>
-            </call-icon>
-          </div>
-          <div>
-            <call-icon>
-              <q-icon name="fa-solid fa-chevron-left"/>
-            </call-icon>
-          </div>
-          <div>
-            <call-icon>
-              <q-icon name="fa-solid fa-camera"/>
-            </call-icon>
-          </div>
-
+          <m-icon name="fa-solid fa-chevron-left"/>
+          <m-icon name="fa-solid fa-chevron-left" size="24px"/>
 <!--                                       display-picture-->
           <p>Pictures</p>
             <div>
@@ -140,7 +79,7 @@ import { Todo, Meta } from 'components/models';
 import ExampleComponent from 'components/ExampleComponent.vue';
 import { ref } from 'vue';
 import PrimaryButton from 'components/atoms/buttons/PrimaryButton.vue';
-import CallIcon from 'components/atoms/icons/CallIcon.vue';
+import MIcon from 'components/atoms/icons/MIcon.vue';
 import DisplayPicture from 'components/atoms/illustrations/DisplayPicture.vue';
 import SplashImage from 'components/atoms/illustrations/SplashImage.vue';
 import MessagesInput from 'components/atoms/message-input/MessagesInput.vue';
