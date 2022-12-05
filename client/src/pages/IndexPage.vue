@@ -80,14 +80,11 @@
           <p>Pictures</p>
             <div>
               <display-picture>
-                <q-avatar>
                  <img src="https://images.unsplash.com/photo-1596510915005-2cd3c22b37df?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&q=80">
-                </q-avatar>
               </display-picture>
               <display-picture>
-                <q-avatar>
+
                  <img src="https://images.unsplash.com/photo-1589156280159-27698a70f29e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=386&q=80">
-                </q-avatar>
               </display-picture>
               <display-picture>
                 <q-avatar>
@@ -116,8 +113,12 @@
             <splash-image/>
           </div>
 
-        </div>
+          <messages-input/>
 
+        </div>
+<!--        <div>-->
+<!--        <sender-message/>-->
+<!--        </div>-->
         <div class="column q-gutter-sm">
           <h3>Molecules</h3>
 
@@ -142,6 +143,8 @@ import PrimaryButton from 'components/atoms/buttons/PrimaryButton.vue';
 import CallIcon from 'components/atoms/icons/CallIcon.vue';
 import DisplayPicture from 'components/atoms/illustrations/DisplayPicture.vue';
 import SplashImage from 'components/atoms/illustrations/SplashImage.vue';
+import MessagesInput from 'components/atoms/message-input/MessagesInput.vue';
+// import SenderMessage from 'components/atoms/messages/SenderMessage.vue';
 
 const todos = ref<Todo[]>([
   {
