@@ -33,7 +33,7 @@
           </div>
 
           <div>
-            <sent-message/>
+            <sent-message stamp="2:00pm"/>
           </div>
 <!--                                       display-picture-->
           <p>Pictures</p>

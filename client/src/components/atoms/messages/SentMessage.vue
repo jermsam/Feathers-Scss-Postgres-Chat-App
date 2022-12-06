@@ -15,7 +15,9 @@ defineProps( {
       return ['hey, how are you?']
     }
     },
-
+  stamp : {String,
+    required: true
+  },
 })
 </script>
 
