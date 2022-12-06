@@ -15,6 +15,26 @@
           <primary-button/>
           <m-icon name="fa-solid fa-chevron-left"/>
           <m-icon name="fa-solid fa-chevron-left" size="24px"/>
+
+          <text-input>
+            <template #label>
+              phone number
+            </template>
+          </text-input>
+
+          <text-input>
+            <template #append>
+              <m-icon name="fa-solid fa-eye"/>
+            </template>
+          </text-input>
+
+          <div>
+            <my-message stamp="9:00am"/>
+          </div>
+
+          <div>
+            <sent-message/>
+          </div>
 <!--                                       display-picture-->
           <p>Pictures</p>
             <div>
@@ -52,12 +72,9 @@
             <splash-image/>
           </div>
 
-          <messages-input/>
 
         </div>
-<!--        <div>-->
-<!--        <sender-message/>-->
-<!--        </div>-->
+
         <div class="column q-gutter-sm">
           <h3>Molecules</h3>
 
@@ -82,8 +99,9 @@ import PrimaryButton from 'components/atoms/buttons/PrimaryButton.vue';
 import MIcon from 'components/atoms/icons/MIcon.vue';
 import DisplayPicture from 'components/atoms/illustrations/DisplayPicture.vue';
 import SplashImage from 'components/atoms/illustrations/SplashImage.vue';
-import MessagesInput from 'components/atoms/message-input/MessagesInput.vue';
-// import SenderMessage from 'components/atoms/messages/SenderMessage.vue';
+import TextInput from 'components/atoms/text-inputs/TextInputs.vue'
+import MyMessage from 'components/atoms/messages/MyMessage.vue';
+import SentMessage from 'components/atoms/messages/SentMessage.vue'
 
 const todos = ref<Todo[]>([
   {
