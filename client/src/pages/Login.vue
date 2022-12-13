@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  //es
+  // eslint-disable-next-line
   name: "Login"
 }
 </script>
