@@ -98,14 +98,7 @@
       </q-input>
     </m-text-input>
   </div>
-<!--                                    display picture-->
-<!--  <div>-->
-<!--    <m-display-picture>-->
-<!--      <q-avatar>-->
-<!--        src="https://images.unsplash.com/photo-1596510915005-2cd3c22b37df?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&q=80";-->
-<!--      </q-avatar>-->
-<!--    </m-display-picture>-->
-<!--  </div>-->
+
 
   </q-page>
 

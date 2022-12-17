@@ -1,5 +1,6 @@
 <template>
-  <q-icon :name="name" :size="size" color="dark" />
+  <q-icon :name="name" :size="size" color="dark" clickable/>
+<!--  <q-btn flat round color="primary" icon="fa-solid fa-chevron-left" />-->
 </template>
 
 <script setup>

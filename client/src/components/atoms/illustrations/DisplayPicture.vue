@@ -1,13 +1,17 @@
 <template>
-  <q-avatar>
+  <q-avatar :src="src" id="DisplayPicture">
     <slot>
 
     </slot>
   </q-avatar>
 </template>
 
-<script>
-
+<script setup>
+defineProps({
+  src: {
+    type: String,
+  },
+})
 </script>
 
 <style scoped>

@@ -11,28 +11,29 @@ defineProps( {
   text: {
     type: Array,
     default(){
-      return ['hey, how are you?']
+      return ['Lorem ipsum dolor sit amet, consectetur n ullamco']
     }
   },
-  stamp : {String,
-       required: true
+  stamp : {
+    type: String,
+    required: true
   },
 })
 </script>
 
 <style scoped lang="scss">
-#MyMessage{
-  background: lightgrey;
-  border: 1 solid var(--q-dark);
-  width: 15.125em;
-  height: 3.5em;
-  border-radius: 0 36px 36px 36px;
-  &:deep(.q-message-text){
-  position: unset;
-  background: unset;
+#MyMessage {
+ max-width: 60%;
+  &:deep(.q-message-text--received) {
+    color: white;
+    border-radius: 0 36px 36px 36px;
+    padding: 1rem;
+    border: 1px solid var(--q-dark);
+  }
 
+  &:deep(.q-message-text::before) {
+    content: none;
+  }
 }
-}
-
 
 </style>

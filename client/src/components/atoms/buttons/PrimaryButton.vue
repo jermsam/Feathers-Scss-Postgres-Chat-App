@@ -1,5 +1,5 @@
 <template>
-  <q-btn unelevated rounded color="primary"  id="PrimaryButton">
+  <q-btn unelevated rounded color="primary"  id="PrimaryButton" to="/feedPage">
     <slot> Submit </slot>
   </q-btn>
 </template>

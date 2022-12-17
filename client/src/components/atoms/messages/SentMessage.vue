@@ -12,10 +12,11 @@ defineProps( {
   text: {
     type: Array,
     default(){
-      return ['hey, how are you?']
+      return ['Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco']
     }
     },
-  stamp : {String,
+  stamp : {
+    type: String,
     required: true
   },
 })
@@ -23,17 +24,15 @@ defineProps( {
 
 <style scoped lang="scss">
 #SentMessage{
-  background:var(--q-secondary);
-  border: 1 solid var(--q-dark);
-  width: 15.125em;
-  height: 3.5em;
-  border-radius: 36px  0 36px 36px;
-  padding-left: 80px;
-
-  &:deep(.q-message-text) {
-    position: unset;
-    background: unset;
-
+ max-width: 60%;
+  &:deep(.q-message-text--received){
+    color: var(--q-secondary);
+    border-radius: 36px  0 36px 36px;
+    padding: 1rem;
+    text-align: right;
+  }
+  &:deep(.q-message-text::before){
+  content: none;
   }
 
 }
