@@ -12,14 +12,96 @@
 // to match your app's branding.
 // Tip: Use the "Theme Builder" on Quasar's documentation website.
 
-$primary   : #1976D2;
-$secondary : #26A69A;
+$primary   : #38A9EB;
+$secondary : #DBB6A1;
 $accent    : #9C27B0;
 
-$dark      : #1D1D1D;
+$dark      : #1B1C21;
 $dark-page : #121212;
 
 $positive  : #21BA45;
 $negative  : #C10015;
 $info      : #31CCEC;
 $warning   : #F2C037;
+
+//custom theme color
+$primary   : #38A9EB;
+$primary1  : #88CBF3;
+:root{
+  --q-color-primary : $primary !important;
+}
+
+.text-primary{
+  color :$primary !important;
+}
+
+.text-secondary{
+  color :$primary1 !important;
+}
+
+.bg-primary1{
+  background : $primary1 !important;
+}
+
+$h1:        (size: 2.25em,     line-height: 2.25em,     letter-spacing: -.01562em, weight: 700) !default;
+$subtitle1:        (size: 1.125em,     line-height: 1.125em,     letter-spacing: -.01562em, weight: 500) !default;
+$body1:        (size: 1em,     line-height: 1em,     letter-spacing: -.01562em, weight: 400) !default;
+$caption:   (size: 1em,   line-height: 1em,  letter-spacing: -.01562em,  weight: 200) !default;
+//$h4:        (size: 1rem,     line-height: 1rem,     letter-spacing: -.01562em, weight: 200) !default;
+
+
+//custom secondary
+
+$secondary1: #DBB6A1;
+$secondary2: #CC0000;
+$secondary3: #E2C5B4;
+$secondary4: #E6CCBD;
+$secondary5: #E9D3C7;
+
+$secondary-map: ('1': $secondary1, '2': $secondary2, '3': $secondary3, '4': $secondary4, '5': $secondary5) !default;
+
+@each  $name, $value in $secondary-map{
+    :root{
+      --q-color-secondary#{$name}:#{$value};
+    }
+  .bg-secondary#{$name}{
+    background: #{$value};
+  }
+  .text-secondary#{$name}{
+    color: #{$value};
+  }
+}
+
+//accent demo
+$accent1: #CC0000;
+$accent2: #D11A1A;
+$accent3: #D63333;
+$accent4: #DB4D4D;
+$accent5: #E06666;
+$accent6: #E68080;
+
+:root{
+  --q-color-accent1: $accent1;
+  --q-color-accent2: $accent2;
+  --q-color-accent3: $accent3;
+  --q-color-accent4: $accent4;
+  --q-color-accent5: $accent5;
+  --q-color-accent6: $accent6;
+}
+
+.text-accent1 {
+  color: $accent1 !important;
+}
+.text-accent2{
+  color: $accent2;
+}
+
+.text-accent3{
+  color: $accent3;
+}
+
+.text-accent4{
+  color: $accent4;
+}
+
+
